@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "oakclient",
+  "version": "${version}",
+  "name": "OakClient",
+  "description": "oak :D",
+  "authors": [
+    "leeeaf"
+  ],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/oakclient/oak.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.leeeaf.oakclient.OakClientClient"
+    ],
+    "main": [
+      "me.leeeaf.oakclient.OakClient"
+    ]
+  },
+  "mixins": [
+    "OakClient.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "minecraft": "1.19.2"
+  }
+}
