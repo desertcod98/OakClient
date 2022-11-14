@@ -19,6 +19,7 @@ import me.leeeaf.oakclient.systems.modules.player.ChestStealer;
 import me.leeeaf.oakclient.systems.modules.player.NoFall;
 import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
 import me.leeeaf.oakclient.systems.modules.world.BuildHeight;
+import me.leeeaf.oakclient.systems.modules.world.Fullbright;
 import me.leeeaf.oakclient.systems.modules.world.XRay;
 
 public enum Category implements ICategory {
@@ -47,6 +48,7 @@ public enum Category implements ICategory {
 		addModule(new Killaura());
 		addModule(new SecretClose());
 		addModule(new AntiCactus());
+		addModule(new Fullbright());
 	}
 
 	@Override
@@ -65,11 +67,6 @@ public enum Category implements ICategory {
 	}
 
 	public static IClient getClient() {
-		return new IClient() {
-			@Override
-			public Stream<ICategory> getCategories() {
-				return Arrays.stream(Category.values());
-			}
-		};
+		return () -> Arrays.stream(Category.values());
 	}
 }
