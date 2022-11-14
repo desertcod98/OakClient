@@ -15,6 +15,7 @@ import me.leeeaf.oakclient.systems.modules.combat.Killaura;
 import me.leeeaf.oakclient.systems.modules.exploit.SecretClose;
 import me.leeeaf.oakclient.systems.modules.movement.fly.Fly;
 import me.leeeaf.oakclient.systems.modules.player.AntiHunger;
+import me.leeeaf.oakclient.systems.modules.player.AntiKnockback;
 import me.leeeaf.oakclient.systems.modules.player.ChestStealer;
 import me.leeeaf.oakclient.systems.modules.player.NoFall;
 import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
@@ -49,6 +50,7 @@ public enum Category implements ICategory {
 		addModule(new SecretClose());
 		addModule(new AntiCactus());
 		addModule(new Fullbright());
+		addModule(new AntiKnockback());
 	}
 
 	@Override
