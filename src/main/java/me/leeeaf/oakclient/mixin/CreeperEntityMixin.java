@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CreeperEntityMixin {
     @Inject(method = "getHurtSound",at=@At("RETURN"),cancellable = true)
     void getHurtSoundInject(DamageSource source, CallbackInfoReturnable<SoundEvent> cir){
-        cir.setReturnValue(SoundEvents.ENTITY_COW_HURT);
+        cir.setReturnValue(SoundEvents.ENTITY_ENDERMAN_HURT); //todo remove lol
     }
 }

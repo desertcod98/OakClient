@@ -2,12 +2,14 @@ package me.leeeaf.oakclient.systems.modules.combat;
 
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
+import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.EntityUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.util.Hand;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,16 +20,18 @@ import java.util.stream.StreamSupport;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class Killaura extends Module {
-    private final DoubleSetting range = new DoubleSetting("Range", "Range", "Maximum range of attacks", ()->true, 0, 6, 4.25);
+    private final DoubleSetting range = new DoubleSetting("Range", "Range", "Maximum range of attacksTEST", ()->true, 0, 6, 4.25);
     private final BooleanSetting delay1_9 = new BooleanSetting("1.9 delay", "1.9 delay", "Should use 1.9 delay?", ()->true, false);
     private final BooleanSetting attackThroughBlocks = new BooleanSetting("Through blocks", "Through blocks", "Should attack through blocks?", ()->true, false);
+
+    public final KeybindSetting keybind=new KeybindSetting("Keybind","keybind","The key to toggle the module.",()->true, GLFW.GLFW_KEY_DELETE);
 
     public Killaura() {
         super("Killaura", "Attacks entities around the player", ()->true, true, Category.COMBAT);
         settings.add(range);
         settings.add(delay1_9);
         settings.add(attackThroughBlocks);
-
+        settings.add(keybind);
     }
 
     @Override

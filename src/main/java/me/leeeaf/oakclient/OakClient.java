@@ -2,7 +2,6 @@ package me.leeeaf.oakclient;
 
 import me.leeeaf.oakclient.gui.ClickGUI;
 import me.leeeaf.oakclient.gui.module.*;
-import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
 import me.leeeaf.oakclient.systems.modules.Category;
 import net.fabricmc.api.ModInitializer;

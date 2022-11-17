@@ -21,6 +21,7 @@ public class ChatScreenMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendChatMessage(Ljava/lang/String;Lnet/minecraft/text/Text;)V")
     )
     void redirectSendChatMessage(ClientPlayerEntity instance,String message, Text preview){
+        System.out.println("TESTTEST");
         if(message.startsWith(PREFIX)){
             String trimmedMessage = message.substring(PREFIX.length());
             if(trimmedMessage.isEmpty() || trimmedMessage.isBlank()) return;

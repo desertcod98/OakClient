@@ -17,6 +17,7 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 public class Criticals extends Module implements IEventListener {
     public Criticals() {
         super("Criticals", "Tries to make every hit on entities critical", ()->true, true, Category.COMBAT); //TODO should study how it works better
+
     }
 
     @Override
