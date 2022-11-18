@@ -8,13 +8,15 @@
     "BlockMixin",
     "CactusBlockMixin",
     "ClientConnectionMixin",
+    "CobwebBlockMixin",
     "CreeperEntityMixin",
     "packets.EntityVelocityUpdateS2CPacketAccessor",
     "packets.PlayerMoveC2SPacketAccessor"
   ],
   "client": [
     "ChatScreenMixin",
-    "ClientPlayerEntityMixin"
+    "ClientPlayerEntityMixin",
+    "EntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

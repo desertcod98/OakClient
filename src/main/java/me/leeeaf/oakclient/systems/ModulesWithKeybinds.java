@@ -21,7 +21,8 @@ public class ModulesWithKeybinds {
 
     public static void toggleIfKeybind(int i){
         modulesWithKeybinds.forEach((keybindSetting, module) -> {
-            System.out.println(keybindSetting.getValue()); //for some reason when setting 'delete' the number is 259 and not 261
+            //for some reason when setting 'delete' the number is 259 and not 261
+            //todo fix
             if((keybindSetting.getValue() != GLFW.GLFW_KEY_DELETE) && keybindSetting.getValue() == i && module.isEnabled()!=null){
                 module.isEnabled().toggle(); //todo controlla se funziona la roba del GLFW.GLFW_KEY_DELETE e magari migliora
             }

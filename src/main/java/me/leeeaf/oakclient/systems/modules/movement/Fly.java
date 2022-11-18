@@ -1,4 +1,4 @@
-package me.leeeaf.oakclient.systems.modules.movement.fly;
+package me.leeeaf.oakclient.systems.modules.movement;
 
 import me.leeeaf.oakclient.OakClientClient;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
@@ -23,7 +23,7 @@ public class Fly extends Module {
 
     @Override
     public void onDisable() {
-
+        mc.player.getAbilities().flying = false;
     }
 
     @Override
@@ -44,8 +44,5 @@ public class Fly extends Module {
             mc.player.setVelocity(new Vec3d(velocity.x, -0.4, velocity.z));
             tickCounter = 0;
         }
-
     }
-
-
 }
