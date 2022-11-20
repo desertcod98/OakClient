@@ -13,14 +13,7 @@ public class EnumSetting<E extends Enum<E>> extends Setting<E> implements IEnumS
 	public EnumSetting (String displayName, String configName, String description, IBoolean visible, E value, Class<E> settingClass) {
 		super(displayName,configName,description,visible,value);
 		this.settingClass=settingClass;
-		array=Arrays.stream(settingClass.getEnumConstants()).map(v->{
-			return new ILabeled() {
-				@Override
-				public String getDisplayName() {
-					return v.toString();
-				}
-			};
-		}).toArray(ILabeled[]::new);
+		array=Arrays.stream(settingClass.getEnumConstants()).map(v-> (ILabeled) v::toString).toArray(ILabeled[]::new);
 	}
 
 	@Override

@@ -2,11 +2,13 @@ package me.leeeaf.oakclient.systems.modules.combat;
 
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
+import me.leeeaf.oakclient.gui.setting.EnumSetting;
 import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.EntityUtils;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.util.Hand;
 import org.lwjgl.glfw.GLFW;
@@ -23,6 +25,7 @@ public class Killaura extends Module {
     private final DoubleSetting range = new DoubleSetting("Range", "Range", "Maximum range of attacksTEST", ()->true, 0, 6, 4.25);
     private final BooleanSetting delay1_9 = new BooleanSetting("1.9 delay", "1.9 delay", "Should use 1.9 delay?", ()->true, false);
     private final BooleanSetting attackThroughBlocks = new BooleanSetting("Through blocks", "Through blocks", "Should attack through blocks?", ()->true, false);
+    private final EnumSetting<SortMethod> sortMethod = new EnumSetting<>("Sort method", "SortMethod", "How to sort entities", () -> true, SortMethod.HEALTH, SortMethod.class);
     public final KeybindSetting keybind=new KeybindSetting("Keybind","keybind","The key to toggle the module.",()->true, GLFW.GLFW_KEY_DELETE);
 
     public Killaura() {
@@ -31,6 +34,7 @@ public class Killaura extends Module {
         settings.add(delay1_9);
         settings.add(attackThroughBlocks);
         settings.add(keybind);
+        settings.add(sortMethod);
     }
 
     @Override
@@ -69,10 +73,19 @@ public class Killaura extends Module {
 
     private List<Entity> getEntities() {
         Stream<Entity> targets = StreamSupport.stream(mc.world.getEntities().spliterator(), false);
-        Comparator<Entity> comparator = Comparator.comparing(mc.player::distanceTo);
+        Comparator<Entity> comparator = null;
+        switch(sortMethod.getValue()){
+            case HEALTH -> comparator = Comparator.comparing((entity)-> ((LivingEntity) entity).getHealth());
+            case DISTANCE -> comparator = Comparator.comparing(mc.player::distanceTo);
+        }
         return targets
                 .filter(entity -> EntityUtils.isAttackable(entity) && (attackThroughBlocks.isOn() || mc.player.canSee(entity)) && mc.player.distanceTo(entity) <= range.getValue())
                 .sorted(comparator)
                 .collect(Collectors.toList());
+    }
+
+    public enum SortMethod{
+        DISTANCE,
+        HEALTH
     }
 }

@@ -51,6 +51,7 @@ public enum Category implements ICategory {
 		addModule(new AntiKnockback());
 		addModule(new AntiWeb());
 		addModule(new HealthTags());
+		addModule(new Portals());
 	}
 
 	@Override

@@ -16,8 +16,9 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class Criticals extends Module implements IEventListener {
     public Criticals() {
-        super("Criticals", "Tries to make every hit on entities critical", ()->true, true, Category.COMBAT); //TODO should study how it works better
-
+        super("Criticals", "Tries to make every hit on entities critical", ()->true, true, Category.COMBAT);
+        //code that needs to be triggered (class PlayerEntity):
+        //boolean bl3 = bl && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class Criticals extends Module implements IEventListener {
             double x = mc.player.getX();
             double y = mc.player.getY();
             double z = mc.player.getZ();
-            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.0633, z, false));
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.001, z, false));
             mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y, z, false));
 
         }
