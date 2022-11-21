@@ -21,7 +21,7 @@ public class Tracers extends Module implements IEventListener {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
     public Tracers() {
-        super("tracer", "tracer", ()->true, true, Category.RENDER);
+        super("Tracers", "Shows lines to things specified with command: tracers", ()->true, true, Category.RENDER);
         settings.add(pacificEntityColor);
         settings.add(widthSetting);
         settings.add(opacitySetting);

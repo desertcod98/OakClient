@@ -2,6 +2,8 @@ package me.leeeaf.oakclient.systems.commands;
 
 import me.leeeaf.oakclient.systems.commands.commands.FOVCommand;
 //import me.leeeaf.oakclient.systems.commands.commands.ToggleCommand;
+import me.leeeaf.oakclient.systems.commands.commands.HelpCommand;
+import me.leeeaf.oakclient.systems.commands.commands.TracersCommand;
 import net.minecraft.util.Util;
 
 import java.util.ArrayList;
@@ -13,7 +15,8 @@ public class CommandRegistry {
 
     private static void initCommands(List<Command> commands){
         commands.add(new FOVCommand());
-        //commands.add(new ToggleCommand());
+        commands.add(new HelpCommand());
+        commands.add(new TracersCommand());
     }
 
     public static List<Command> getCommands(){

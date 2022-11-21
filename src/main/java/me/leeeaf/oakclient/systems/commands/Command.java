@@ -10,4 +10,14 @@ public abstract class Command {
     }
 
     public abstract void excecute(String[] args);
+    @Override
+    public String toString(){
+        return name+" : "+description;
+    }
+
+    public String helpMessage(){
+        return "No help info for command: "+name;
+    }
+
+
 }

@@ -9,6 +9,7 @@
     "CactusBlockMixin",
     "ClientConnectionMixin",
     "CobwebBlockMixin",
+    "WorldMixin",
     "packets.EntityVelocityUpdateS2CPacketAccessor",
     "packets.PlayerMoveC2SPacketAccessor"
   ],

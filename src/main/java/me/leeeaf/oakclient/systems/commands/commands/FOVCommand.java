@@ -6,7 +6,7 @@ import net.minecraft.text.Text;
 
 public class FOVCommand extends Command {
     public FOVCommand() {
-        super("FOV", "Changes camera FOV", new String[]{"FOV"});
+        super("fov", "Changes camera FOV", new String[]{"FOV"});
     }
 
 
