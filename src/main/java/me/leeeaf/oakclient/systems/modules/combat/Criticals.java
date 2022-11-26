@@ -47,7 +47,7 @@ public class Criticals extends Module implements IEventListener {
             double x = mc.player.getX();
             double y = mc.player.getY();
             double z = mc.player.getZ();
-            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.001, z, false));
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.07, z, false));
             mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y, z, false));
 
         }

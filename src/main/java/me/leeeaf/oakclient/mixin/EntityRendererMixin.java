@@ -14,12 +14,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderer.class)
-public class EntityRendererMixin <T extends Entity>{
+public abstract class EntityRendererMixin <T extends Entity>{
     @Inject(method = "renderLabelIfPresent", at=@At("HEAD"))
     private void onRenderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
         if(entity.isAlive()){
             EventBus.getEventBus().post(new RenderLableIfPresentEvent(text, (LivingEntity) entity));
         }
-        System.out.println("LMAO");
     }
 }

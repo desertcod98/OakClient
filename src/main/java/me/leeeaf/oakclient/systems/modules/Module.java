@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.systems.modules;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -14,7 +15,7 @@ public abstract class Module implements IModule {
 	public final String displayName,description;
 	public final IBoolean visible;
 	public final Category category;
-	public final List<Setting<?>> settings=new ArrayList<Setting<?>>();
+	public final List<Setting<?>> settings= new ArrayList<>();
 	public final boolean toggleable;
 	private boolean enabled=false;
 	
@@ -70,6 +71,6 @@ public abstract class Module implements IModule {
 
 	@Override
 	public Stream<ISetting<?>> getSettings() {
-		return settings.stream().filter(setting->setting instanceof ISetting).sorted((a,b)->a.displayName.compareTo(b.displayName)).map(setting->(ISetting<?>)setting);
+		return settings.stream().filter(setting->setting instanceof ISetting).sorted(Comparator.comparing(a -> a.displayName)).map(setting->(ISetting<?>)setting);
 	}
 }

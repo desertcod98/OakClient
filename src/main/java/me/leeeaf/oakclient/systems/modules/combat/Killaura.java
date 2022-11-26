@@ -62,7 +62,6 @@ public class Killaura extends Module {
 
                 mc.interactionManager.attackEntity(mc.player, entity);
                 mc.player.swingHand(Hand.MAIN_HAND);
-
                 if (wasSprinting)
                     mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_SPRINTING));
             }
