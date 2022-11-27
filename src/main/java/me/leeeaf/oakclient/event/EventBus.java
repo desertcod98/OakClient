@@ -27,7 +27,9 @@ public class EventBus {
     }
 
     public void subscribe(IEventListener IEventListener){
-        insert(listenerMap.computeIfAbsent(IEventListener.getTarget(), k -> new ArrayList<>()), IEventListener);
+        for(Class<?> target : IEventListener.getTargets()){
+            insert(listenerMap.computeIfAbsent(target, k -> new ArrayList<>()), IEventListener);
+        }
     }
 
     private void insert(List<IEventListener> listeners, IEventListener listener){
@@ -35,7 +37,10 @@ public class EventBus {
     }
 
     public void unsubscribe(IEventListener IEventListener){
-        listenerMap.get(IEventListener.getTarget()).remove(IEventListener);
+        for(Class<?> target : IEventListener.getTargets()){
+            listenerMap.get(target).remove(IEventListener);
+        }
+
     }
 
 

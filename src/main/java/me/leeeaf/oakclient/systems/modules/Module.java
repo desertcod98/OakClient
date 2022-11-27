@@ -63,11 +63,11 @@ public abstract class Module implements IModule {
 		};
 	}
 
-	public abstract void onDisable();
+	public void onDisable(){};
 
-	public abstract void onEnable();
+	public void onEnable(){};
 
-	public abstract void onTick();
+	public void onTick(){};
 
 	@Override
 	public Stream<ISetting<?>> getSettings() {

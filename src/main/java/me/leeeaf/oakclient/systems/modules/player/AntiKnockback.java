@@ -43,8 +43,8 @@ public class AntiKnockback extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return PacketRecieveEvent.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{PacketRecieveEvent.class};
     }
 
     @Override
@@ -57,8 +57,4 @@ public class AntiKnockback extends Module implements IEventListener {
         EventBus.getEventBus().subscribe(this);
     }
 
-    @Override
-    public void onTick() {
-
-    }
 }

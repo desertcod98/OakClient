@@ -23,12 +23,6 @@ public class NoFall extends Module implements IEventListener {
         EventBus.getEventBus().subscribe(this);
     }
 
-
-    @Override
-    public void onTick() {
-
-    }
-
     @Override
     public void call(Object event) {
         if(((PacketSendEvent) event).packet instanceof PlayerMoveC2SPacket){
@@ -38,7 +32,7 @@ public class NoFall extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return PacketSendEvent.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{PacketSendEvent.class};
     }
 }

@@ -1,6 +1,8 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
+import com.google.common.eventbus.Subscribe;
 import com.lukflug.panelstudio.base.IBoolean;
+import me.leeeaf.oakclient.event.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
@@ -24,16 +26,6 @@ public class ChestStealer extends Module {
         settings.add(delay);
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
 
     @Override
     public void onTick() {
@@ -51,5 +43,4 @@ public class ChestStealer extends Module {
             }
         }
     }
-
 }

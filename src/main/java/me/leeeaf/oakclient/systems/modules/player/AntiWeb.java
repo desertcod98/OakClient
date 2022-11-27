@@ -10,18 +10,4 @@ public class AntiWeb extends Module {
         //logic handled in: CobwebBlockMixin
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-    @Override
-    public void onTick() {
-
-    }
 }

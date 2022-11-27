@@ -8,19 +8,4 @@ public class Portals extends Module {
         super("Portals", "Makes you able to use GUIs in portals", ()->true, true, Category.PLAYER);
         //logic handled in ClientPlayerEntityMixin::updateNausea()
     }
-
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-    @Override
-    public void onTick() {
-
-    }
 }

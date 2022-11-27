@@ -1,6 +1,5 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
-import com.lukflug.panelstudio.base.IBoolean;
 import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.RenderLableIfPresentEvent;
@@ -27,11 +26,6 @@ public class HealthTags extends Module implements IEventListener {
     }
 
     @Override
-    public void onTick() {
-
-    }
-
-    @Override
     public void call(Object event) {
         LivingEntity entity = ((RenderLableIfPresentEvent) event).entity;
         Text text = ((RenderLableIfPresentEvent) event).lableText;
@@ -42,8 +36,8 @@ public class HealthTags extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return RenderLableIfPresentEvent.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{RenderLableIfPresentEvent.class};
     }
 
     private Formatting getColor(int health)

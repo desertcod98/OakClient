@@ -1,20 +1,19 @@
 package me.leeeaf.oakclient.systems.commands.commands;
 
 import me.leeeaf.oakclient.systems.commands.Command;
+import me.leeeaf.oakclient.systems.modules.render.Search;
 import net.minecraft.block.Block;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.systems.modules.render.Search.searchTargets;
 
 public class SearchCommand extends Command {
-    public static ArrayList<Block> searchTargets = new ArrayList<>();
 
     public SearchCommand() {
         super("search", "Manages search targets (blocks)", new String[]{"search"}, new Command[]{

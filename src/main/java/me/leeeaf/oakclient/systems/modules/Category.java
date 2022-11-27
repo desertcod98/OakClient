@@ -16,6 +16,7 @@ import me.leeeaf.oakclient.systems.modules.exploit.SecretClose;
 import me.leeeaf.oakclient.systems.modules.movement.Fly;
 import me.leeeaf.oakclient.systems.modules.player.*;
 import me.leeeaf.oakclient.systems.modules.render.HealthTags;
+import me.leeeaf.oakclient.systems.modules.render.Search;
 import me.leeeaf.oakclient.systems.modules.render.Tracers;
 import me.leeeaf.oakclient.systems.modules.world.*;
 
@@ -40,7 +41,6 @@ public enum Category implements ICategory {
 		addModule(new Fly());
 		addModule(new ChestStealer());
 		addModule(new NoFall());
-		addModule(new BuildHeight());
 		addModule(new Criticals());
 		addModule(new Killaura());
 		addModule(new SecretClose());
@@ -52,6 +52,7 @@ public enum Category implements ICategory {
 		addModule(new Portals());
 		addModule(new Tracers());
 		addModule(new AntiWeather());
+		addModule(new Search());
 	}
 
 	@Override

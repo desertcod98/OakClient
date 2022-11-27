@@ -38,16 +38,6 @@ public class Killaura extends Module {
     }
 
     @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-    @Override
     public void onTick() {
         if(!mc.player.isAlive()){
             return;

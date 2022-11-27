@@ -22,7 +22,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.WorldChunk;
 
 import java.awt.*;
 
@@ -48,7 +48,7 @@ public class Tracers extends Module implements IEventListener {
 
 
     public Tracers() {
-        super("Tracers", "Renders lines to selected entities (can add targets with .search command)", ()->true, true, Category.RENDER);
+        super("Tracers", "Renders lines to selected entities", ()->true, true, Category.RENDER);
         settings.add(traceTargetsRange);
         settings.add(shouldTraceSearchTargets);
         settings.add(widthSetting);
@@ -72,11 +72,6 @@ public class Tracers extends Module implements IEventListener {
     }
 
     @Override
-    public void onTick() {
-
-    }
-
-    @Override
     public void call(Object event) {
         float width = widthSetting.getValue().floatValue();
         int opacity = (int) (opacitySetting.getValue()*255);
@@ -95,45 +90,36 @@ public class Tracers extends Module implements IEventListener {
                 Renderer.drawLine(vec.x, vec.y, vec.z, vec.x, vec.y + e.getHeight() * 0.9, vec.z, lineColor, width);
             }
         }
-        if(shouldTraceSearchTargets.getValue()){
-            traceSearchTargets(traceTargetsRange.getValue(), vec2);
-        }
     }
 
-    private void traceSearchTargets(int range, Vec3d cameraVec3d) {
-        ChunkPos playerChunkPos = new ChunkPos((int) mc.player.getX(), (int) mc.player.getZ());
-        Integer renderDistance = mc.options.getViewDistance().getValue();
-        int distance = Math.min(range, renderDistance);
-        ChunkPos chunkCorner1 = new ChunkPos(playerChunkPos.x-distance, playerChunkPos.z-distance);
-        ChunkPos chunkCorner2 = new ChunkPos(playerChunkPos.x+distance, playerChunkPos.z+distance);
-        for(int chunkX = chunkCorner1.x;chunkX<chunkCorner2.x;chunkX++){
-            for(int chunkZ = chunkCorner1.z;chunkZ<chunkCorner2.z;chunkZ++){
-                if(!mc.world.getChunkManager().isChunkLoaded(chunkX,chunkZ)){
-                    Chunk chunk = mc.world.getChunk(chunkX,chunkZ);
-
-                    //search for blocks in chunk
-                    int minY = chunk.getBottomY();
-                    int maxY = chunk.getTopY();
-                    int maxX = chunkX+15;
-                    int maxZ = chunkZ+15;
-                    for(int x = chunkX; x<maxX; x++){
-                        for(int y = minY; y<maxY; y++){
-                            for(int z = chunkZ; z<maxZ; z++){
-                                BlockPos blockPos = new BlockPos(x,y,z);
-                                BlockState blockState = chunk.getBlockState(blockPos);
-                                Block block = blockState.getBlock(); //TODO il problema è qui, il blocco trovato è sempre: translation{key='block.minecraft.void_air', args=[]}
-                                if(SearchCommand.searchTargets.contains(block)){
-                                    //render
-                                    LineColor lineColor =  LineColor.single(Color.PINK.getRed(), Color.PINK.getGreen(), Color.PINK.getBlue(), 0.75f);
-                                    Renderer.drawLine(cameraVec3d.x, cameraVec3d.y, cameraVec3d.z, x, y, z, lineColor, 1);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    private void traceSearchTargets(int range, Vec3d cameraVec3d) { //todo da rifare tutto in search
+//        Integer renderDistance = mc.options.getViewDistance().getValue();
+//        int distance = Math.min(range, renderDistance);
+//        for (int chunkX = -distance; chunkX <= distance; chunkX++) {
+//            for (int chunkZ = -distance; chunkZ <= distance; chunkZ++) {
+//                WorldChunk chunk = mc.world.getChunkManager().getWorldChunk((int) mc.player.getX() / 16 + chunkX, (int) mc.player.getZ() / 16 + chunkZ);
+//
+//                if (chunk != null) {
+//                        //search for blocks in chunk
+//                    ChunkPos chunkPos = chunk.getPos();
+//                    for(int x = 0; x<16; x++){
+//                        for(int y = mc.world.getBottomY(); y<mc.world.getTopY(); y++){
+//                            for(int z = 0; z<16; z++){
+//                                BlockPos blockPos = new BlockPos(chunkPos.getStartX()+x,y,chunkPos.getStartZ()+z);
+//                                BlockState blockState = chunk.getBlockState(blockPos);
+//                                Block block = blockState.getBlock(); //TODO il problema è qui, il blocco trovato è sempre: translation{key='block.minecraft.void_air', args=[]}
+//                                if(SearchCommand.searchTargets.contains(block)){
+//                                    //render
+//                                    LineColor lineColor =  LineColor.single(Color.PINK.getRed(), Color.PINK.getGreen(), Color.PINK.getBlue(), 0.75f);
+//                                    Renderer.drawLine(cameraVec3d.x, cameraVec3d.y, cameraVec3d.z, blockPos.getX(), blockPos.getY(), blockPos.getZ(), lineColor, 1);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     private Color getColor(Entity e) {
@@ -145,7 +131,7 @@ public class Tracers extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return WorldRenderEvent.Post.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{WorldRenderEvent.Post.class};
     }
 }

@@ -8,7 +8,10 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
+
+import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class OakClient implements ModInitializer {
     private static ClickGUI gui;
@@ -24,15 +27,17 @@ public class OakClient implements ModInitializer {
                 HudRenderCallback.EVENT.register((cli, tickDelta)->gui.render());
                 inited=true;
             }
-            for (int i=32;i<keys.length;i++) {
-                if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
-                    keys[i]=!keys[i];
-                    if (keys[i]) {
+            if(!(mc.currentScreen instanceof ChatScreen)){
+                for (int i=32;i<keys.length;i++) {
+                    if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
+                        keys[i]=!keys[i];
+                        if (keys[i]) {
 
-                        ModulesWithKeybinds.toggleIfKeybind(i);
-                        if (i==ClickGUIModule.keybind.getKey()) gui.enterGUI();
-                        if (i==HUDEditorModule.keybind.getKey()) gui.enterHUDEditor();
-                        gui.handleKeyEvent(i);
+                            ModulesWithKeybinds.toggleIfKeybind(i);
+                            if (i==ClickGUIModule.keybind.getKey()) gui.enterGUI();
+                            if (i==HUDEditorModule.keybind.getKey()) gui.enterHUDEditor();
+                            gui.handleKeyEvent(i);
+                        }
                     }
                 }
             }

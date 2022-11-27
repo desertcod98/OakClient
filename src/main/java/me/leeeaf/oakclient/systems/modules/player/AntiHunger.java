@@ -24,11 +24,6 @@ public class AntiHunger extends Module implements IEventListener {
 
 
     @Override
-    public void onTick() {
-
-    }
-
-    @Override
     public void call(Object event) {
         if (((PacketSendEvent) event).packet instanceof ClientCommandC2SPacket ) {
             ClientCommandC2SPacket.Mode mode = ((ClientCommandC2SPacket) ((PacketSendEvent) event).packet).getMode();
@@ -40,7 +35,7 @@ public class AntiHunger extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return PacketSendEvent.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{PacketSendEvent.class};
     }
 }

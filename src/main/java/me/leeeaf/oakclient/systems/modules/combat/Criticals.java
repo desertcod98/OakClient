@@ -58,8 +58,8 @@ public class Criticals extends Module implements IEventListener {
     }
 
     @Override
-    public Class<?> getTarget() {
-        return PacketSendEvent.class;
+    public Class<?>[] getTargets() {
+        return new Class[]{PacketSendEvent.class};
     }
 
     @Override
@@ -72,8 +72,4 @@ public class Criticals extends Module implements IEventListener {
         EventBus.getEventBus().subscribe(this);
     }
 
-    @Override
-    public void onTick() {
-
-    }
 }

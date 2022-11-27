@@ -15,17 +15,6 @@ public class Clicker extends Module {
     }
 
     @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-
-    @Override
     public void onTick() {
         HitResult rayTrace = mc.crosshairTarget;
         if (rayTrace instanceof EntityHitResult && mc.interactionManager != null) {
