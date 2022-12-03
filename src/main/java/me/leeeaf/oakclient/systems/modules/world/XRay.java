@@ -22,7 +22,7 @@ public class XRay extends Module {
 
     public XRay() {
         super("XRay", "Only renders certain blocks", ()->true, true, Category.WORLD);
-        settings.add(shouldRenderFluids);
+        settings.add(shouldRenderFluids); //todo
     }
 
     @Override

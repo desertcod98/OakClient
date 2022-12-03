@@ -9,6 +9,7 @@ import com.lukflug.panelstudio.setting.IClient;
 import com.lukflug.panelstudio.setting.IModule;
 import me.leeeaf.oakclient.gui.module.*;
 import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
+import me.leeeaf.oakclient.systems.modules.combat.AutoWeb;
 import me.leeeaf.oakclient.systems.modules.combat.Clicker;
 import me.leeeaf.oakclient.systems.modules.combat.Criticals;
 import me.leeeaf.oakclient.systems.modules.combat.Killaura;
@@ -53,6 +54,8 @@ public enum Category implements ICategory {
 		addModule(new Tracers());
 		addModule(new AntiWeather());
 		addModule(new Search());
+		addModule(new AutoTotem());
+		addModule(new AutoWeb());
 	}
 
 	@Override
