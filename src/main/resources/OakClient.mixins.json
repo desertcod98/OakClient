@@ -8,7 +8,6 @@
     "CactusBlockMixin",
     "ClientConnectionMixin",
     "CobwebBlockMixin",
-    "LivingEntityMixin",
     "WorldMixin",
     "packets.EntityVelocityUpdateS2CPacketAccessor",
     "packets.ExplosionS2CPacketAccessor",
