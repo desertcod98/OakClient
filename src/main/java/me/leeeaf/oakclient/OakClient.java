@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.gui.screen.Screen;
 import org.lwjgl.glfw.GLFW;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
@@ -27,7 +28,7 @@ public class OakClient implements ModInitializer {
                 HudRenderCallback.EVENT.register((cli, tickDelta)->gui.render());
                 inited=true;
             }
-            if(!(mc.currentScreen instanceof ChatScreen)){
+            if(mc.currentScreen == null){
                 for (int i=32;i<keys.length;i++) {
                     if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
                         keys[i]=!keys[i];

@@ -10,6 +10,9 @@ import me.leeeaf.oakclient.utils.EntityUtils;
 import me.leeeaf.oakclient.utils.player.RotationUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.Monster;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
@@ -32,6 +35,11 @@ public class Killaura extends Module {
     private final BooleanSetting rotate = new BooleanSetting("Rotate", "rotate", "Rotates towards target", ()->true, true);
     private final EnumSetting<RotationMode> rotationMode = new EnumSetting<>("Rotation mode", "rotationMode", "How to rotate", ()->true, RotationMode.PACKET, RotationMode.class);
 
+    //targets
+    private final BooleanSetting attackPlayers = new BooleanSetting("Attack players", "attackPlayers", "Attack players", ()->true, true);
+    private final BooleanSetting attackPacificEntities = new BooleanSetting("Attack pacific entities", "attackPacificEntities", "Attack pacific entities", ()->true, false);
+    private final BooleanSetting attackHostileEntities = new BooleanSetting("Attack hostile entities", "attackHostileEntities", "Attack hostile entities", ()->true, true);
+
     public Killaura() {
         super("Killaura", "Attacks entities around the player", ()->true, true, Category.COMBAT);
         settings.add(range);
@@ -41,6 +49,10 @@ public class Killaura extends Module {
         settings.add(sortMethod);
         settings.add(rotate);
         rotate.subSettings.add(rotationMode);
+
+        settings.add(attackPacificEntities);
+        settings.add(attackPlayers);
+        settings.add(attackHostileEntities);
     }
 
     @Override
@@ -52,6 +64,7 @@ public class Killaura extends Module {
 
         if(cooldownDone){
             for (Entity entity : getEntities()){
+                if(!shouldAttackEntity(entity)) continue;
                 boolean wasSprinting = mc.player.isSprinting();
                 if (wasSprinting)
                     mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.STOP_SPRINTING));
@@ -67,8 +80,13 @@ public class Killaura extends Module {
                     mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_SPRINTING));
             }
         }
+    }
 
-
+    private boolean shouldAttackEntity(Entity entity) {
+        if(entity instanceof PlayerEntity && !entity.equals(mc.player) && attackPlayers.isOn()) return true;
+        if(entity instanceof Monster && attackHostileEntities.isOn()) return true;
+        if(entity instanceof PassiveEntity && attackPacificEntities.isOn()) return true;
+        return false;
     }
 
     private List<Entity> getEntities() {

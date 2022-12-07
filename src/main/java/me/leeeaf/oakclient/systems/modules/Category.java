@@ -12,6 +12,8 @@ import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
 import me.leeeaf.oakclient.systems.modules.combat.*;
 import me.leeeaf.oakclient.systems.modules.exploit.SecretClose;
 import me.leeeaf.oakclient.systems.modules.movement.Fly;
+import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
+import me.leeeaf.oakclient.systems.modules.movement.Scaffold;
 import me.leeeaf.oakclient.systems.modules.player.*;
 import me.leeeaf.oakclient.systems.modules.render.HealthTags;
 import me.leeeaf.oakclient.systems.modules.render.Search;
@@ -53,6 +55,8 @@ public enum Category implements ICategory {
 		addModule(new Search());
 		addModule(new AutoTotem());
 		addModule(new AutoWeb());
+		addModule(new Scaffold());
+		addModule(new SafeWalk());
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class BlockUtils {
     public static boolean place(BlockPos blockPos, int invSlot, Hand hand, boolean rotate, boolean checkEntities, boolean swingHand, boolean airPlace){
         if (invSlot < 0 || invSlot > 8) return false;
         if (!canPlace(blockPos, checkEntities)) return false;
-        Vec3d hitPos = new Vec3d(blockPos.getX()+0.5, blockPos.getY(), blockPos.getZ());
+        Vec3d hitPos = new Vec3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5); //why +0.5 works
         BlockPos neighbour;
         Direction side = getPlaceSide(blockPos);
         if (side == null) {
@@ -27,7 +27,7 @@ public class BlockUtils {
             neighbour = blockPos;
         }else {
             neighbour = blockPos.offset(side.getOpposite());
-            hitPos.add(side.getOffsetX(), side.getOffsetY(), side.getOffsetZ()); //?
+            hitPos.add(side.getOffsetX() * 0.5, side.getOffsetY() * 0.5, side.getOffsetZ() * 0.5); //why *0.5 works
         }
         if(rotate){
             RotationUtils.rotate(blockPos.getX(),blockPos.getY(),blockPos.getZ());

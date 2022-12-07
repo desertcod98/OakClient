@@ -8,19 +8,4 @@ public class AntiCactus extends Module {
         super("Anti Cactus", "Tries to prevent the player from taking cactus damage", ()->true, true, Category.WORLD);
         //LOGIC HANDLED IN: CactusBlockMixin
     }
-
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-    @Override
-    public void onTick() {
-
-    }
 }
