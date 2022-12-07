@@ -4,6 +4,7 @@
   "package": "me.leeeaf.oakclient.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockMixin",
     "BlockMixin",
     "CactusBlockMixin",
     "ClientConnectionMixin",
@@ -17,6 +18,7 @@
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "EntityRendererMixin",
+    "LightmapTextureManagerMixin",
     "WorldRendererMixin"
   ],
   "injectors": {

@@ -1,10 +1,7 @@
 package me.leeeaf.oakclient.systems.commands;
 
-import me.leeeaf.oakclient.systems.commands.commands.FOVCommand;
+import me.leeeaf.oakclient.systems.commands.commands.*;
 //import me.leeeaf.oakclient.systems.commands.commands.ToggleCommand;
-import me.leeeaf.oakclient.systems.commands.commands.HelpCommand;
-import me.leeeaf.oakclient.systems.commands.commands.ReloadSoundsCommand;
-import me.leeeaf.oakclient.systems.commands.commands.SearchCommand;
 import net.minecraft.util.Util;
 
 import java.util.ArrayList;
@@ -19,6 +16,8 @@ public class CommandRegistry {
         commands.add(new HelpCommand());
         commands.add(new SearchCommand());
         commands.add(new ReloadSoundsCommand());
+        commands.add(new ReloadCommand());
+        commands.add(new XrayCommand());
     }
 
     public static List<Command> getCommands(){
