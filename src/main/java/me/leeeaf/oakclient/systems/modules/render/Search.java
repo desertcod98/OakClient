@@ -2,6 +2,7 @@ package me.leeeaf.oakclient.systems.modules.render;
 
 import com.google.common.collect.Sets;
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
@@ -23,7 +24,7 @@ import java.util.Set;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class Search extends Module implements IEventListener {
+public class Search extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
 
@@ -68,13 +69,13 @@ public class Search extends Module implements IEventListener {
 
     @Override
     public void onEnable(){
-        EventBus.getEventBus().subscribe(this);
+        super.onEnable();
         chunkProcessor.start();
     }
 
     @Override
     public void onDisable(){
-        EventBus.getEventBus().unsubscribe(this);
+        super.onDisable();
         chunkProcessor.stop();
         foundBlocks.clear();
     }
@@ -90,20 +91,19 @@ public class Search extends Module implements IEventListener {
     }
 
 
-    @Override
-    public void call(Object event) {
-        if(event instanceof WorldRenderEvent){
-            Vec3d camVec = new Vec3d(0, 0, 75)
-                    .rotateX(-(float) Math.toRadians(mc.gameRenderer.getCamera().getPitch()))
-                    .rotateY(-(float) Math.toRadians(mc.gameRenderer.getCamera().getYaw()))
-                    .add(mc.cameraEntity.getEyePos());
-            for(BlockPos blockPos : foundBlocks){
-                int[] col = getBlockColor(mc.world.getBlockState(blockPos), blockPos);
-                LineColor lineColor =  LineColor.single(col[0], col[1], col[2], (int)(opacitySetting.getValue()*255));
-                Renderer.drawLine(camVec.x, camVec.y, camVec.z, blockPos.getX(), blockPos.getY(), blockPos.getZ(), lineColor, widthSetting.getValue().floatValue());
-            }
+    @EventListener
+    public void onWorldRenderPost(WorldRenderEvent.Post event) {
+        Vec3d camVec = new Vec3d(0, 0, 75)
+                .rotateX(-(float) Math.toRadians(mc.gameRenderer.getCamera().getPitch()))
+                .rotateY(-(float) Math.toRadians(mc.gameRenderer.getCamera().getYaw()))
+                .add(mc.cameraEntity.getEyePos());
+        for(BlockPos blockPos : foundBlocks){
+            int[] col = getBlockColor(mc.world.getBlockState(blockPos), blockPos);
+            LineColor lineColor =  LineColor.single(col[0], col[1], col[2], (int)(opacitySetting.getValue()*255));
+            Renderer.drawLine(camVec.x, camVec.y, camVec.z, blockPos.getX(), blockPos.getY(), blockPos.getZ(), lineColor, widthSetting.getValue().floatValue());
         }
     }
+
 
     private int[] getBlockColor(BlockState blockState, BlockPos blockPos){
         if (blockState.getBlock() == Blocks.NETHER_PORTAL) {
@@ -112,10 +112,5 @@ public class Search extends Module implements IEventListener {
 
         int color = blockState.getMapColor(mc.world, blockPos).color;
         return new int[] { (color & 0xff0000) >> 16, (color & 0xff00) >> 8, color & 0xff }; //? lol
-    }
-
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{WorldRenderEvent.Post.class};
     }
 }

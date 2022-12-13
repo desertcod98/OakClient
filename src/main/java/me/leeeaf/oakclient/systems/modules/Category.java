@@ -59,6 +59,7 @@ public enum Category implements ICategory {
 		addModule(new Scaffold());
 		addModule(new SafeWalk());
 		addModule(new Blink());
+		addModule(new Freecam());
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
@@ -23,7 +24,7 @@ import java.awt.*;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class Tracers extends Module implements IEventListener {
+public class Tracers extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
 
@@ -41,8 +42,6 @@ public class Tracers extends Module implements IEventListener {
     private final ColorSetting itemEntityColor = new ColorSetting("Item entities color", "itemEntityColor", "Color of the item entities tracers", ()->true,false,false, Color.CYAN,false);
 
 
-    //todo add players lmao
-
 
     public Tracers() {
         super("Tracers", "Renders lines to selected entities", ()->true, true, Category.RENDER);
@@ -58,18 +57,8 @@ public class Tracers extends Module implements IEventListener {
         shouldTraceItemEntity.subSettings.add(itemEntityColor);
     }
 
-    @Override
-    public void onDisable() {
-        EventBus.getEventBus().unsubscribe(this);
-    }
-
-    @Override
-    public void onEnable() {
-        EventBus.getEventBus().subscribe(this);
-    }
-
-    @Override
-    public void call(Object event) {
+    @EventListener
+    public void onWorldRenderPost(WorldRenderEvent.Post event) {
         float width = widthSetting.getValue().floatValue();
         int opacity = (int) (opacitySetting.getValue()*255);
 
@@ -94,12 +83,7 @@ public class Tracers extends Module implements IEventListener {
         if(e instanceof PassiveEntity && shouldTracePacificEntity.getValue()) return pacificEntityColor.getColor();
         if(e instanceof Monster && shouldTraceHostileEntity.getValue()) return hostileEntityColor.getColor();
         if(e instanceof ItemEntity && shouldTraceItemEntity.getValue()) return itemEntityColor.getColor();
-        if(e instanceof PlayerEntity && e!= mc.player && shouldTracePlayers.getValue()) return playersColor.getColor(); //todo test if it works
+        if(e instanceof PlayerEntity && e!= mc.player && shouldTracePlayers.getValue()) return playersColor.getColor();
         return null;
-    }
-
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{WorldRenderEvent.Post.class};
     }
 }

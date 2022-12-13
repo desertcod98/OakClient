@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.RenderLableIfPresentEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
@@ -10,34 +11,19 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-public class HealthTags extends Module implements IEventListener {
+public class HealthTags extends Module {
     public HealthTags() {
         super("Health tags", "Shows entities health in nametags", ()->true, true, Category.RENDER);
     }
 
-    @Override
-    public void onDisable() {
-        EventBus.getEventBus().unsubscribe(this);
-    }
-
-    @Override
-    public void onEnable() {
-        EventBus.getEventBus().subscribe(this);
-    }
-
-    @Override
-    public void call(Object event) {
-        LivingEntity entity = ((RenderLableIfPresentEvent) event).entity;
-        Text text = ((RenderLableIfPresentEvent) event).lableText;
+    @EventListener
+    public void onRenderLableIfPresent(RenderLableIfPresentEvent event) {
+        LivingEntity entity = event.entity;
+        Text text = event.lableText;
         int health = (int) entity.getHealth();
         MutableText formattedHealth = Text.literal(" ")
                 .append(Integer.toString(health)).formatted(getColor(health));
         ((MutableText)text).append(formattedHealth);
-    }
-
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{RenderLableIfPresentEvent.class};
     }
 
     private Formatting getColor(int health)

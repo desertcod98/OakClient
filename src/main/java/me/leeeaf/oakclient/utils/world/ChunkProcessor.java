@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.utils.world;
 
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.packets.PacketRecieveEvent;
 import net.minecraft.block.BlockState;
@@ -21,7 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class ChunkProcessor implements IEventListener {
+public class ChunkProcessor {
     private ExecutorService executor;
 
     private int threads;
@@ -53,13 +54,13 @@ public class ChunkProcessor implements IEventListener {
         }
     }
 
-    @Override
-    public void call(Object event) {
+    @EventListener
+    public void onPacketRecieve(PacketRecieveEvent event) {
         if(MinecraftClient.getInstance().world ==null){
             return;
         }
 
-        Packet<?> packet = ((PacketRecieveEvent) event).packet;
+        Packet<?> packet = event.packet;
 
         if(updateBlockConsumer!=null && packet instanceof BlockUpdateS2CPacket){
             executor.execute(()->updateBlockConsumer.accept(((BlockUpdateS2CPacket) packet).getPos(), ((BlockUpdateS2CPacket) packet).getState()));
@@ -80,9 +81,5 @@ public class ChunkProcessor implements IEventListener {
             chunk.loadFromPacket(((ChunkDataS2CPacket) packet).getChunkData().getSectionsDataBuf(), new NbtCompound(), ((ChunkDataS2CPacket) packet).getChunkData().getBlockEntities(((ChunkDataS2CPacket) packet).getX(), ((ChunkDataS2CPacket) packet).getZ()));
             executor.execute(() -> loadChunkConsumer.accept(chunk));
         }
-    }
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{PacketRecieveEvent.class};
     }
 }

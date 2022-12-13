@@ -2,6 +2,8 @@ package me.leeeaf.oakclient.mixin;
 
 
 import com.mojang.authlib.GameProfile;
+import me.leeeaf.oakclient.event.events.ClientMoveEvent;
+import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
@@ -11,12 +13,13 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.MovementType;
 import net.minecraft.network.encryption.PlayerPublicKey;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.SoftOverride;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -53,6 +56,15 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
             return client.currentScreen;
         }
     }
+
+    @Inject(method = "move", at=@At("HEAD"), cancellable = true)
+    void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci){
+        if(EventBus.getEventBus().post(new ClientMoveEvent()).isCancelled()){
+            ci.cancel();
+        }
+
+    }
+
     @Override
     protected boolean clipAtLedge() {
         SafeWalk safeWalk = (SafeWalk) Category.MOVEMENT.getModules()

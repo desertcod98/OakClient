@@ -1,10 +1,10 @@
 package me.leeeaf.oakclient.event.events;
 
-import me.leeeaf.oakclient.event.Cancellable;
+import me.leeeaf.oakclient.event.Event;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 
-public class RenderLableIfPresentEvent extends Cancellable {
+public class RenderLableIfPresentEvent extends Event {
     public Text lableText;
     public LivingEntity entity;
 

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.gui.setting.Setting;
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.base.IToggleable;
@@ -18,6 +19,7 @@ public abstract class Module implements IModule {
 	public final List<Setting<?>> settings= new ArrayList<>();
 	public final boolean toggleable;
 	private boolean enabled=false;
+	private boolean subscribed = false;
 	
 	public Module (String displayName, String description, IBoolean visible, boolean toggleable, Category category) {
 		this.displayName=displayName;
@@ -63,9 +65,17 @@ public abstract class Module implements IModule {
 		};
 	}
 
-	public void onDisable(){};
+	public void onDisable(){
+		if(subscribed){
+			EventBus.getEventBus().unsubscribe(this);
+		}
+	};
 
-	public void onEnable(){};
+	public void onEnable(){
+		if(EventBus.getEventBus().subscribe(this)){
+			subscribed = true;
+		}
+	};
 
 	public void onTick(){};
 

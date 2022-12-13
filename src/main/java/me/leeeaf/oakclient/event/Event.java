@@ -1,6 +1,6 @@
 package me.leeeaf.oakclient.event;
 
-public class Cancellable{
+public class Event {
     private boolean cancelled = false;
 
     public void setCancelled(boolean cancelled) {

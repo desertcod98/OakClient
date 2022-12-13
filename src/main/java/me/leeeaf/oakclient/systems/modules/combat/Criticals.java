@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.combat;
 
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
@@ -14,16 +15,16 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class Criticals extends Module implements IEventListener {
+public class Criticals extends Module{
     public Criticals() {
         super("Criticals", "Tries to make every hit on entities critical", ()->true, true, Category.COMBAT);
         //code that needs to be triggered (class PlayerEntity):
         //boolean bl3 = bl && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity;
     }
 
-    @Override
-    public void call(Object event) {
-        if (((PacketSendEvent) event).packet instanceof PlayerInteractEntityC2SPacket packet) {
+    @EventListener
+    public void onPacketSend(PacketSendEvent event) {
+        if (event.packet instanceof PlayerInteractEntityC2SPacket packet) {
             if (PlayerInteractEntityC2SUtils.getInteractType(packet) == PlayerInteractEntityC2SUtils.InteractType.ATTACK
                     && PlayerInteractEntityC2SUtils.getEntity(packet) instanceof LivingEntity) {
                 sendCritPackets();
@@ -56,20 +57,4 @@ public class Criticals extends Module implements IEventListener {
             mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_SPRINTING));
         }
     }
-
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{PacketSendEvent.class};
-    }
-
-    @Override
-    public void onDisable() {
-        EventBus.getEventBus().unsubscribe(this);
-    }
-
-    @Override
-    public void onEnable() {
-        EventBus.getEventBus().subscribe(this);
-    }
-
 }

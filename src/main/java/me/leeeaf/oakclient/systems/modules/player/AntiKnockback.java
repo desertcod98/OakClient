@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventListener;
 import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.packets.PacketRecieveEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
@@ -14,7 +15,7 @@ import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class AntiKnockback extends Module implements IEventListener {
+public class AntiKnockback extends Module{
     private final IntegerSetting velXZ_setting= new IntegerSetting("XZ velocity", "XZvelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);
     private final IntegerSetting velY_setting= new IntegerSetting("Y velocity", "Yvelocity", "Vertical velocity to keep", ()->true, 0, 100, 0);
 
@@ -32,12 +33,12 @@ public class AntiKnockback extends Module implements IEventListener {
         explosions.subSettings.add(explosions_velY_setting);
     }
 
-    @Override
-    public void call(Object event) {
+    @EventListener
+    public void onPacketRecieve(PacketRecieveEvent event) {
         if (mc.player == null)
             return;
 
-        if ((((PacketRecieveEvent) event).packet) instanceof EntityVelocityUpdateS2CPacket packet) {
+        if (event.packet instanceof EntityVelocityUpdateS2CPacket packet) {
             if (packet.getId() == mc.player.getId()) {
                 double velXZ = velXZ_setting.getValue()/100d;
                 double velY = velY_setting.getValue()/100d;
@@ -50,7 +51,7 @@ public class AntiKnockback extends Module implements IEventListener {
                 ((EntityVelocityUpdateS2CPacketAccessor) packet).setY((int) (pvelY * 8000 + mc.player.getVelocity().y * 8000));
                 ((EntityVelocityUpdateS2CPacketAccessor) packet).setZ((int) (pvelZ * 8000 + mc.player.getVelocity().z * 8000));
             }
-        }else if((((PacketRecieveEvent) event).packet) instanceof ExplosionS2CPacket packet && explosions.getValue()){
+        }else if(event.packet instanceof ExplosionS2CPacket packet && explosions.getValue()){
             double velXZ = explosions_velXZ_setting.getValue()/100d;
             double velY = explosions_velY_setting.getValue()/100d;
 
@@ -59,20 +60,4 @@ public class AntiKnockback extends Module implements IEventListener {
             ((ExplosionS2CPacketAccessor) packet).setPlayerVelocityY((float) (packet.getPlayerVelocityY()*velY));
         }
     }
-
-    @Override
-    public Class<?>[] getTargets() {
-        return new Class[]{PacketRecieveEvent.class};
-    }
-
-    @Override
-    public void onDisable() {
-        EventBus.getEventBus().unsubscribe(this);
-    }
-
-    @Override
-    public void onEnable() {
-        EventBus.getEventBus().subscribe(this);
-    }
-
 }

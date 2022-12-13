@@ -22,7 +22,7 @@ public class XRay extends Module {
         super("XRay", "Only renders certain blocks", ()->true, true, Category.WORLD);
         //some logic handled in: AbstractBlockMixin::getAmbientOcclusionLevel
         //and in               : LightmapTextureManagerMixin::update
-        //todo manage rendering of blockEntities
+        //TODO manage rendering of blockEntities
     }
 
     @Override
@@ -42,7 +42,7 @@ public class XRay extends Module {
     public void onTick() {
     }
 
-    public boolean shouldRenderSide(Block block ){
+    public boolean shouldRenderSide(Block block){
         return(blocksToRender.contains(block));
     }
 
