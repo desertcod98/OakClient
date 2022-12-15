@@ -2,7 +2,6 @@ package me.leeeaf.oakclient.systems.modules.player;
 
 import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.mixin.packets.PlayerMoveC2SPacketAccessor;
@@ -26,8 +25,8 @@ public class NoFall extends Module{
 
     @EventListener
     public void onPacketSend(PacketSendEvent event) {
-        if(((PacketSendEvent) event).packet instanceof PlayerMoveC2SPacket){
-            ((PlayerMoveC2SPacketAccessor) ((PacketSendEvent) event).packet).setOnGround(true);
+        if(event.packet instanceof PlayerMoveC2SPacket){
+            ((PlayerMoveC2SPacketAccessor) event.packet).setOnGround(true);
         }
 
     }

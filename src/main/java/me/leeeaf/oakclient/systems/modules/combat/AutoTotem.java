@@ -1,9 +1,5 @@
 package me.leeeaf.oakclient.systems.modules.combat;
 
-import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.event.IEventListener;
-import me.leeeaf.oakclient.event.events.TotemUsedEvent;
-import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.player.PlayerInventory;

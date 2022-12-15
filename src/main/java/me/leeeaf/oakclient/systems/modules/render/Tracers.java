@@ -1,13 +1,10 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
-import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
-import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.renderer.Renderer;

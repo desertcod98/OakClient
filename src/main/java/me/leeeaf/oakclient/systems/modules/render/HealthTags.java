@@ -1,8 +1,6 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
-import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.events.RenderLableIfPresentEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;

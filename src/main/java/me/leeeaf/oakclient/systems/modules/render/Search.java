@@ -1,11 +1,8 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import com.google.common.collect.Sets;
-import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.IEventListener;
 import me.leeeaf.oakclient.event.WorldRenderEvent;
-import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;

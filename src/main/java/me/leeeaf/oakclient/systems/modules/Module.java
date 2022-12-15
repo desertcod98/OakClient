@@ -13,6 +13,7 @@ import com.lukflug.panelstudio.setting.IModule;
 import com.lukflug.panelstudio.setting.ISetting;
 
 public abstract class Module implements IModule {
+	//TODO IMPORTANT, every module should have a keybind setting
 	public final String displayName,description;
 	public final IBoolean visible;
 	public final Category category;
