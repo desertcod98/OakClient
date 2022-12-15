@@ -1,4 +1,4 @@
-package me.leeeaf.oakclient.event;
+package me.leeeaf.oakclient.event.events;
 
 import net.minecraft.client.util.math.MatrixStack;
 

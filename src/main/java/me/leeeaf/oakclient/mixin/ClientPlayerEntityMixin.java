@@ -7,6 +7,7 @@ import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
+import me.leeeaf.oakclient.systems.modules.player.Freecam;
 import me.leeeaf.oakclient.systems.modules.player.Portals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -36,6 +37,12 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         super(world, profile, publicKey);
     }
 
+    @Inject(method = "pushOutOfBlocks", at = @At("HEAD"), cancellable = true)
+    void onPushOutOfBlocks(double x, double z, CallbackInfo ci){
+        Module freecam =  Category.getModule(Freecam.class);
+        if(freecam != null && freecam.isEnabled().isOn()) ci.cancel();
+    }
+
     @Inject(method = "tick", at = @At("TAIL"))
     void postTick(CallbackInfo ci){
         Category.getClient().getCategories().forEach(category -> {
@@ -62,7 +69,6 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         if(EventBus.getEventBus().post(new ClientMoveEvent()).isCancelled()){
             ci.cancel();
         }
-
     }
 
     @Override

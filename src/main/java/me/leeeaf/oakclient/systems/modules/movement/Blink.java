@@ -23,7 +23,7 @@ public class Blink extends Module{
     @Override
     public void onEnable() {
         super.onEnable();
-        fakePlayer = new FakePlayer(mc.player, mc.player.getEntityName());
+        fakePlayer = new FakePlayer(mc.player);
         fakePlayer.spawn(); //todo first time enabling the module model does not spawn
     }
 

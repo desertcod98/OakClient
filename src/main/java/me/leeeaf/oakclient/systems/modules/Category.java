@@ -80,4 +80,12 @@ public enum Category implements ICategory {
 	public static IClient getClient() {
 		return () -> Arrays.stream(Category.values());
 	}
+
+	public static Module getModule(Class<? extends Module> moduleClass){
+		for(Category category : Category.values()){
+			Module module = (Module) category.getModules().filter(iModule -> iModule.getClass().equals(moduleClass)).findFirst().orElse(null);
+			if(module!=null) return module;
+		}
+		return null;
+	}
 }

@@ -7,13 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class FakePlayer extends OtherClientPlayerEntity {
-    public FakePlayer(PlayerEntity player, String username){
+    public FakePlayer(PlayerEntity player){
         super(mc.world, player.getGameProfile(), player.getPublicKey());
         copyPositionAndRotation(player);
         setPose(player.getPose());
         setHealth(20);
     }
-    public void spawn(){
+    public void spawn(){ //todo first time calling method model does not spawn
         mc.world.addEntity(getId(), this);
     }
 
