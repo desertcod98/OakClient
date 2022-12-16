@@ -1,8 +1,6 @@
 package me.leeeaf.oakclient.utils.player;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;

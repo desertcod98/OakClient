@@ -1,11 +1,10 @@
 package me.leeeaf.oakclient.systems.modules.combat;
 
-import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 

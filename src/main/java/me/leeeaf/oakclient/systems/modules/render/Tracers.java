@@ -1,6 +1,6 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
-import me.leeeaf.oakclient.event.EventListener;
+import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
@@ -10,7 +10,6 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.renderer.Renderer;
 import me.leeeaf.oakclient.systems.renderer.color.LineColor;
 import net.minecraft.entity.Entity;
-
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -54,7 +53,7 @@ public class Tracers extends Module {
         shouldTraceItemEntity.subSettings.add(itemEntityColor);
     }
 
-    @EventListener
+    @EventSubscribe
     public void onWorldRenderPost(WorldRenderEvent.Post event) {
         float width = widthSetting.getValue().floatValue();
         int opacity = (int) (opacitySetting.getValue()*255);

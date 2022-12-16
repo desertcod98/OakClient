@@ -1,8 +1,8 @@
 package me.leeeaf.oakclient.utils.world;
 
 import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.events.packets.PacketRecieveEvent;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -53,8 +53,8 @@ public class ChunkProcessor {
         }
     }
 
-    @EventListener
-    public void onPacketRecieve(PacketRecieveEvent event) {
+    @EventSubscribe
+    public void onPacketRecieve(PacketEvent.Receive event) {
         if(MinecraftClient.getInstance().world ==null){
             return;
         }

@@ -1,10 +1,9 @@
 package me.leeeaf.oakclient.systems.modules.movement;
 
-import me.leeeaf.oakclient.OakClientClient;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.gui.setting.KeybindSetting;
-import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;

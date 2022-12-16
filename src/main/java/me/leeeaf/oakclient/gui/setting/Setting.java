@@ -1,12 +1,12 @@
 package me.leeeaf.oakclient.gui.setting;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.ILabeled;
 import com.lukflug.panelstudio.setting.ISetting;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public abstract class Setting<T> implements ILabeled {
 	public final String displayName,configName,description;

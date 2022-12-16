@@ -1,8 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.world;
 
-import me.leeeaf.oakclient.gui.setting.BooleanSetting;
-import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 

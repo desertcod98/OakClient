@@ -22,6 +22,6 @@ public class WorldRendererMixin {
     private void render_return(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer,
                                LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo callback) {
         RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
-        EventBus.getEventBus().post(new WorldRenderEvent.Post(tickDelta,matrices));
+        EventBus.getEventBus().post(new WorldRenderEvent.Post());
     }
 }

@@ -1,9 +1,9 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
-import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
-import me.leeeaf.oakclient.systems.modules.Module;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 
 public class AntiHunger extends Module {
@@ -11,8 +11,8 @@ public class AntiHunger extends Module {
         super("AntiHunger", "REDUCES hunger consumption", ()->true, true, Category.PLAYER);
     }
 
-    @EventListener
-    public void onPacketSend(PacketSendEvent event) {
+    @EventSubscribe
+    public void onPacketSend(PacketEvent.Send event) {
         if (event.packet instanceof ClientCommandC2SPacket ) {
             ClientCommandC2SPacket.Mode mode = ((ClientCommandC2SPacket) (event).packet).getMode();
 

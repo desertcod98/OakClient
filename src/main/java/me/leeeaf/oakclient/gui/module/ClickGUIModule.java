@@ -1,12 +1,11 @@
 package me.leeeaf.oakclient.gui.module;
 
-import me.leeeaf.oakclient.systems.modules.Category;
-import me.leeeaf.oakclient.systems.modules.Module;
-import org.lwjgl.glfw.GLFW;
-
 import me.leeeaf.oakclient.gui.setting.EnumSetting;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.gui.setting.KeybindSetting;
+import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
+import org.lwjgl.glfw.GLFW;
 
 public class ClickGUIModule extends Module {
 	public static final EnumSetting<ColorModel> colorModel=new EnumSetting<ColorModel>("Color Model","colorModel","Whether to use RGB or HSB.",()->true,ColorModel.RGB,ColorModel.class);

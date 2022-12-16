@@ -3,7 +3,6 @@ package me.leeeaf.oakclient.utils.world;
 import me.leeeaf.oakclient.utils.player.RotationUtils;
 import net.minecraft.block.*;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;

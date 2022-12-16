@@ -1,10 +1,10 @@
 package me.leeeaf.oakclient.gui.setting;
 
-import java.util.Arrays;
-
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.IEnumSetting;
 import com.lukflug.panelstudio.setting.ILabeled;
+
+import java.util.Arrays;
 
 public class EnumSetting<E extends Enum<E>> extends Setting<E> implements IEnumSetting {
 	private final Class<E> settingClass;

@@ -1,6 +1,5 @@
 package me.leeeaf.oakclient.systems.modules.world;
 
-import com.lukflug.panelstudio.base.IBoolean;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 

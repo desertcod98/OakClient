@@ -1,8 +1,8 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
-import me.leeeaf.oakclient.event.EventListener;
+import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.ClientMoveEvent;
-import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
@@ -54,13 +54,13 @@ public class Freecam extends Module {
         mc.player.getAbilities().flying = false;
     }
 
-    @EventListener
+    @EventSubscribe
     public void onClientMove(ClientMoveEvent event) {
         mc.player.noClip = true;
     }
 
-    @EventListener
-    public void onPacketSend(PacketSendEvent event){
+    @EventSubscribe
+    public void onPacketSend(PacketEvent.Send event){
         if(event.packet instanceof PlayerMoveC2SPacket || event.packet instanceof ClientCommandC2SPacket){
             event.cancel();
         }

@@ -1,9 +1,5 @@
 package me.leeeaf.oakclient.systems.modules;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 import com.lukflug.panelstudio.setting.ICategory;
 import com.lukflug.panelstudio.setting.IClient;
 import com.lukflug.panelstudio.setting.IModule;
@@ -19,7 +15,15 @@ import me.leeeaf.oakclient.systems.modules.player.*;
 import me.leeeaf.oakclient.systems.modules.render.HealthTags;
 import me.leeeaf.oakclient.systems.modules.render.Search;
 import me.leeeaf.oakclient.systems.modules.render.Tracers;
-import me.leeeaf.oakclient.systems.modules.world.*;
+import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
+import me.leeeaf.oakclient.systems.modules.world.AntiWeather;
+import me.leeeaf.oakclient.systems.modules.world.Fullbright;
+import me.leeeaf.oakclient.systems.modules.world.XRay;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 public enum Category implements ICategory {
 	COMBAT("Combat"),HUD("HUD"),MOVEMENT("Movement"),OTHER("Other"),RENDER("Render"),WORLD("World"),PLAYER("Player"), EXPLOIT("Exploit");

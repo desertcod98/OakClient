@@ -1,11 +1,11 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
 import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
-import me.leeeaf.oakclient.systems.modules.Module;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import me.leeeaf.oakclient.mixin.packets.PlayerMoveC2SPacketAccessor;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 public class NoFall extends Module{
@@ -23,8 +23,8 @@ public class NoFall extends Module{
         EventBus.getEventBus().subscribe(this);
     }
 
-    @EventListener
-    public void onPacketSend(PacketSendEvent event) {
+    @EventSubscribe
+    public void onPacketSend(PacketEvent.Send event) {
         if(event.packet instanceof PlayerMoveC2SPacket){
             ((PlayerMoveC2SPacketAccessor) event.packet).setOnGround(true);
         }

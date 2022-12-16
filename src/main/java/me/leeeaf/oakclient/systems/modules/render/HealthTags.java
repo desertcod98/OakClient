@@ -1,6 +1,6 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
-import me.leeeaf.oakclient.event.EventListener;
+import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.RenderLableIfPresentEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
@@ -14,7 +14,7 @@ public class HealthTags extends Module {
         super("Health tags", "Shows entities health in nametags", ()->true, true, Category.RENDER);
     }
 
-    @EventListener
+    @EventSubscribe
     public void onRenderLableIfPresent(RenderLableIfPresentEvent event) {
         LivingEntity entity = event.entity;
         Text text = event.lableText;

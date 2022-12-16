@@ -1,17 +1,16 @@
 package me.leeeaf.oakclient.gui.module;
 
-import java.awt.Color;
-import java.awt.Point;
-
-import me.leeeaf.oakclient.gui.setting.BooleanSetting;
-import me.leeeaf.oakclient.gui.setting.StringSetting;
 import com.lukflug.panelstudio.base.IToggleable;
 import com.lukflug.panelstudio.component.IFixedComponent;
 import com.lukflug.panelstudio.hud.HUDList;
 import com.lukflug.panelstudio.hud.ListComponent;
+import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
+import me.leeeaf.oakclient.gui.setting.StringSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
+
+import java.awt.*;
 
 public class WatermarkModule extends Module {
 	private static WatermarkModule instance;

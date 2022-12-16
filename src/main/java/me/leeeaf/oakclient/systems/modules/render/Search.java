@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import com.google.common.collect.Sets;
-import me.leeeaf.oakclient.event.EventListener;
+import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
@@ -88,7 +88,7 @@ public class Search extends Module {
     }
 
 
-    @EventListener
+    @EventSubscribe
     public void onWorldRenderPost(WorldRenderEvent.Post event) {
         Vec3d camVec = new Vec3d(0, 0, 75)
                 .rotateX(-(float) Math.toRadians(mc.gameRenderer.getCamera().getPitch()))

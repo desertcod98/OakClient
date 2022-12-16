@@ -1,7 +1,6 @@
 package me.leeeaf.oakclient.systems.commands.commands;
 
 import me.leeeaf.oakclient.systems.commands.Command;
-import me.leeeaf.oakclient.systems.modules.render.Search;
 import net.minecraft.block.Block;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;

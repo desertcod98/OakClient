@@ -1,16 +1,16 @@
 package me.leeeaf.oakclient.systems.modules;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Stream;
-
-import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.gui.setting.Setting;
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.base.IToggleable;
 import com.lukflug.panelstudio.setting.IModule;
 import com.lukflug.panelstudio.setting.ISetting;
+import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.gui.setting.Setting;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Stream;
 
 public abstract class Module implements IModule {
 	//TODO IMPORTANT, every module should have a keybind setting

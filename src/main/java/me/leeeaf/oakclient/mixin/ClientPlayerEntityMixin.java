@@ -2,10 +2,10 @@ package me.leeeaf.oakclient.mixin;
 
 
 import com.mojang.authlib.GameProfile;
-import me.leeeaf.oakclient.event.events.ClientMoveEvent;
 import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.systems.modules.Module;
+import me.leeeaf.oakclient.event.events.ClientMoveEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
 import me.leeeaf.oakclient.systems.modules.player.Freecam;
 import me.leeeaf.oakclient.systems.modules.player.Portals;

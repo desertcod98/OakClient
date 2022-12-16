@@ -1,13 +1,5 @@
 package me.leeeaf.oakclient.gui.module;
-import java.awt.Color;
-import java.awt.Point;
-import java.util.function.Supplier;
 
-import me.leeeaf.oakclient.systems.modules.Category;
-import me.leeeaf.oakclient.systems.modules.Module;
-import org.lwjgl.glfw.GLFW;
-
-import me.leeeaf.oakclient.gui.setting.ColorSetting;
 import com.lukflug.panelstudio.base.Animation;
 import com.lukflug.panelstudio.base.IToggleable;
 import com.lukflug.panelstudio.component.IFixedComponent;
@@ -18,6 +10,13 @@ import com.lukflug.panelstudio.tabgui.StandardTheme;
 import com.lukflug.panelstudio.tabgui.TabGUI;
 import com.lukflug.panelstudio.theme.IColorScheme;
 import com.lukflug.panelstudio.theme.ITheme;
+import me.leeeaf.oakclient.gui.setting.ColorSetting;
+import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
+import org.lwjgl.glfw.GLFW;
+
+import java.awt.*;
+import java.util.function.Supplier;
 
 public class TabGUIModule extends Module {
 	private static TabGUIModule instance;

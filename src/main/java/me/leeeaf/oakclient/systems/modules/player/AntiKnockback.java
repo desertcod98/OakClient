@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
-import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.events.packets.PacketRecieveEvent;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.mixin.packets.EntityVelocityUpdateS2CPacketAccessor;
@@ -31,8 +31,8 @@ public class AntiKnockback extends Module{
         explosions.subSettings.add(explosions_velY_setting);
     }
 
-    @EventListener
-    public void onPacketRecieve(PacketRecieveEvent event) {
+    @EventSubscribe
+    public void onPacketRecieve(PacketEvent.Receive event) {
         if (mc.player == null)
             return;
 

@@ -2,10 +2,8 @@ package me.leeeaf.oakclient.gui.setting;
 
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.IKeybindSetting;
-
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.TranslatableTextContent;
-import org.lwjgl.glfw.GLFW;
 
 public class KeybindSetting extends Setting<Integer> implements IKeybindSetting {
 	public KeybindSetting (String displayName, String configName, String description, IBoolean visible, Integer value) {

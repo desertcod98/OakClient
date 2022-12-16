@@ -1,8 +1,8 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
-import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.Timer;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.item.ItemStack;

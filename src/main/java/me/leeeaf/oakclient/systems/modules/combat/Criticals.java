@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.combat;
 
-import me.leeeaf.oakclient.event.EventListener;
-import me.leeeaf.oakclient.event.events.packets.PacketSendEvent;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.PacketEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.PlayerInteractEntityC2SUtils;
@@ -20,8 +20,8 @@ public class Criticals extends Module{
         //boolean bl3 = bl && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity;
     }
 
-    @EventListener
-    public void onPacketSend(PacketSendEvent event) {
+    @EventSubscribe
+    public void onPacketSend(PacketEvent.Send event) {
         if (event.packet instanceof PlayerInteractEntityC2SPacket packet) {
             if (PlayerInteractEntityC2SUtils.getInteractType(packet) == PlayerInteractEntityC2SUtils.InteractType.ATTACK
                     && PlayerInteractEntityC2SUtils.getEntity(packet) instanceof LivingEntity) {

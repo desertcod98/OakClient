@@ -1,15 +1,14 @@
 package me.leeeaf.oakclient;
 
 import me.leeeaf.oakclient.gui.ClickGUI;
-import me.leeeaf.oakclient.gui.module.*;
+import me.leeeaf.oakclient.gui.module.ClickGUIModule;
+import me.leeeaf.oakclient.gui.module.HUDEditorModule;
 import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
 import me.leeeaf.oakclient.systems.modules.Category;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.client.gui.screen.Screen;
 import org.lwjgl.glfw.GLFW;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;

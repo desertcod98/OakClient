@@ -1,12 +1,12 @@
 package me.leeeaf.oakclient.gui.setting;
 
-import java.awt.Color;
-
-import me.leeeaf.oakclient.gui.module.ClickGUIModule;
-import me.leeeaf.oakclient.gui.module.ClickGUIModule.ColorModel;
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.IColorSetting;
 import com.lukflug.panelstudio.theme.ITheme;
+import me.leeeaf.oakclient.gui.module.ClickGUIModule;
+import me.leeeaf.oakclient.gui.module.ClickGUIModule.ColorModel;
+
+import java.awt.*;
 
 public class ColorSetting extends Setting<Color> implements IColorSetting {
 	public final boolean hasAlpha,allowsRainbow;
