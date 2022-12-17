@@ -1,13 +1,15 @@
 package me.leeeaf.oakclient;
 
+import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.HudRenderEvent;
+import me.leeeaf.oakclient.event.events.PostTickEvent;
 import me.leeeaf.oakclient.gui.ClickGUI;
 import me.leeeaf.oakclient.gui.module.ClickGUIModule;
 import me.leeeaf.oakclient.gui.module.HUDEditorModule;
 import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
 import me.leeeaf.oakclient.systems.modules.Category;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
@@ -20,27 +22,36 @@ public class OakClient implements ModInitializer {
     @Override
     public void onInitialize() {
         Category.init();
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (!inited) {
-                for (int i=32;i<keys.length;i++) keys[i]= GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS;
-                gui=new ClickGUI();
-                HudRenderCallback.EVENT.register((cli, tickDelta)->gui.render());
-                inited=true;
-            }
-            if(mc.currentScreen == null){
-                for (int i=32;i<keys.length;i++) {
-                    if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
-                        keys[i]=!keys[i];
-                        if (keys[i]) {
+        EventBus.getEventBus().subscribe(this);
+    }
 
-                            ModulesWithKeybinds.toggleIfKeybind(i);
-                            if (i==ClickGUIModule.keybind.getKey()) gui.enterGUI();
-                            if (i==HUDEditorModule.keybind.getKey()) gui.enterHUDEditor();
-                            gui.handleKeyEvent(i);
-                        }
+    @EventSubscribe
+    public void onPostTick(PostTickEvent event){
+        if (!inited) {
+            for (int i=32;i<keys.length;i++) keys[i]= GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS;
+            gui=new ClickGUI();
+            inited=true;
+        }
+        if(mc.currentScreen == null){
+            for (int i=32;i<keys.length;i++) {
+                if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
+                    keys[i]=!keys[i];
+                    if (keys[i]) {
+
+                        ModulesWithKeybinds.toggleIfKeybind(i);
+                        if (i==ClickGUIModule.keybind.getKey()) gui.enterGUI();
+                        if (i==HUDEditorModule.keybind.getKey()) gui.enterHUDEditor();
+                        gui.handleKeyEvent(i);
                     }
                 }
             }
-        });
+        }
+    }
+
+    @EventSubscribe
+    public void onHudRender(HudRenderEvent event){
+        if(!inited && gui!=null){
+            gui.render();
+        }
     }
 }

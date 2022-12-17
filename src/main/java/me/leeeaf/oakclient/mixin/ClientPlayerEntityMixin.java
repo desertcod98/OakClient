@@ -4,6 +4,7 @@ package me.leeeaf.oakclient.mixin;
 import com.mojang.authlib.GameProfile;
 import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.events.ClientMoveEvent;
+import me.leeeaf.oakclient.event.events.PostTickEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
@@ -45,6 +46,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
     @Inject(method = "tick", at = @At("TAIL"))
     void postTick(CallbackInfo ci){
+        EventBus.getEventBus().post(new PostTickEvent());
         Category.getClient().getCategories().forEach(category -> {
             category.getModules().forEach(module->{
                 if(module.isEnabled() != null && module.isEnabled().isOn()){

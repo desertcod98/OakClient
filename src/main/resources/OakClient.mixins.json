@@ -18,6 +18,7 @@
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "EntityRendererMixin",
+    "InGameHudMixin",
     "LightmapTextureManagerMixin",
     "WorldRendererMixin"
   ],

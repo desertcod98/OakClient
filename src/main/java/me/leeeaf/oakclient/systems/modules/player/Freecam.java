@@ -11,6 +11,7 @@ import me.leeeaf.oakclient.utils.FakePlayer;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.util.math.Vec3d;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
@@ -25,8 +26,10 @@ public class Freecam extends Module {
         //some logic handled in ClientPlayerEntityMixin::onPushOutOfBlocks
     }
 
-    FakePlayer fakePlayer;
-
+    private FakePlayer fakePlayer;
+    private Vec3d prevPos;
+    private float prevYaw;
+    private float prevPitch;
     @Override
     public void onTick() {
         super.onTick();
@@ -39,6 +42,9 @@ public class Freecam extends Module {
     @Override
     public void onEnable() {
         super.onEnable();
+        prevPos = mc.player.getPos();
+        prevPitch = mc.player.getPitch();
+        prevYaw = mc.player.getYaw();
         fakePlayer = new FakePlayer(mc.player);
         fakePlayer.spawn();
         mc.chunkCullingEnabled = chunkCulling.isOn();
@@ -48,6 +54,10 @@ public class Freecam extends Module {
     @Override
     public void onDisable() {
         super.onDisable();
+        mc.player.setYaw(prevYaw);
+        mc.player.setPitch(prevPitch);
+        mc.player.setPos(prevPos.x, prevPos.y, prevPos.z);
+        mc.player.setVelocity(Vec3d.ZERO);
         fakePlayer.despawn();
         mc.chunkCullingEnabled = true;
         mc.worldRenderer.reload();

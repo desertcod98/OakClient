@@ -48,7 +48,7 @@ public class Search extends Module {
             },
             (blockPos, blockState) -> { //updateBlockConsumer
                 if(searchTargets.contains(blockState.getBlock())){
-                    foundBlocks.add(blockPos); //todo does it work?
+                    foundBlocks.add(blockPos);
                 }else{
                     foundBlocks.remove(blockPos);
                 }

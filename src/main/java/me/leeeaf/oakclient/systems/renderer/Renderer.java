@@ -10,8 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.*;
 
 public class Renderer {
-    //TODO ALL CODE IN PACKAGE RENDERER COPIED FROM BleachHacks
-    // -------------------- Fill + Outline Boxes --------------------
 
     public static void drawBoxBoth(BlockPos blockPos, QuadColor color, float lineWidth, Direction... excludeDirs) {
         drawBoxBoth(new Box(blockPos), color, lineWidth, excludeDirs);
