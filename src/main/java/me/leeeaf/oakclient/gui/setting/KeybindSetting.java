@@ -12,7 +12,11 @@ public class KeybindSetting extends Setting<Integer> implements IKeybindSetting 
 
 	@Override
 	public int getKey() {
-		return getValue();
+		if(getValue()!=null){
+			return getValue();
+		}else{
+			return -1;
+		}
 	}
 
 	@Override

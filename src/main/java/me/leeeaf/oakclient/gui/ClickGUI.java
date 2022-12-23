@@ -19,7 +19,6 @@ import me.leeeaf.oakclient.gui.module.ClickGUIModule;
 import me.leeeaf.oakclient.gui.module.ClickGUIModule.Theme;
 import me.leeeaf.oakclient.gui.module.HUDEditorModule;
 import me.leeeaf.oakclient.gui.module.TabGUIModule;
-import me.leeeaf.oakclient.gui.module.WatermarkModule;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;

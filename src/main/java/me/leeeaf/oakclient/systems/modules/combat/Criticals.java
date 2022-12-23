@@ -46,8 +46,9 @@ public class Criticals extends Module{
             double x = mc.player.getX();
             double y = mc.player.getY();
             double z = mc.player.getZ();
-            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.07, z, false));
-            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y, z, false));
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.080, z, false));
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.12, z, false)); //TODO sometimes bypasses ncp, sometimes gets fallheightmismatch
+            mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y + 0.076, z, false));
 
         }
         if (sprinting) {

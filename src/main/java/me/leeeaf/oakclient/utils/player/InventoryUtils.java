@@ -1,6 +1,5 @@
 package me.leeeaf.oakclient.utils.player;
 
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 

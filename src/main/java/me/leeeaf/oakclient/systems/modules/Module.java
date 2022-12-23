@@ -5,6 +5,7 @@ import com.lukflug.panelstudio.base.IToggleable;
 import com.lukflug.panelstudio.setting.IModule;
 import com.lukflug.panelstudio.setting.ISetting;
 import me.leeeaf.oakclient.event.EventBus;
+import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.gui.setting.Setting;
 
 import java.util.ArrayList;
@@ -21,13 +22,16 @@ public abstract class Module implements IModule {
 	public final boolean toggleable;
 	private boolean enabled=false;
 	private boolean subscribed = false;
-	
+
 	public Module (String displayName, String description, IBoolean visible, boolean toggleable, Category category) {
 		this.displayName=displayName;
 		this.description=description;
 		this.visible=visible;
 		this.toggleable=toggleable;
 		this.category = category;
+
+		KeybindSetting keybindSetting = new KeybindSetting("Keybind", "keybind", "The key to toggle the module", () -> true, null);
+		settings.add(keybindSetting);
 	}
 	
 	@Override

@@ -1,22 +1,18 @@
 package me.leeeaf.oakclient.systems.modules.movement;
 
 import me.leeeaf.oakclient.gui.setting.IntegerSetting;
-import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.util.math.Vec3d;
-import org.lwjgl.glfw.GLFW;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class Fly extends Module {
     private int tickCounter;
-    public final KeybindSetting keybind=new KeybindSetting("Keybind","keybind","The key to toggle the module.",()->true, GLFW.GLFW_KEY_R);
     public final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "FlySpeed", "The speed at which you fly", ()->true,1,100,20);
     public Fly() {
         super("Fly", "Allows the player to fly", ()->true, true, Category.MOVEMENT);
-        settings.add(keybind);
         settings.add(flySpeed);
     }
 

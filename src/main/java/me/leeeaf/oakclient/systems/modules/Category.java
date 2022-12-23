@@ -4,7 +4,7 @@ import com.lukflug.panelstudio.setting.ICategory;
 import com.lukflug.panelstudio.setting.IClient;
 import com.lukflug.panelstudio.setting.IModule;
 import me.leeeaf.oakclient.gui.module.*;
-import me.leeeaf.oakclient.systems.ModulesWithKeybinds;
+import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.combat.*;
 import me.leeeaf.oakclient.systems.modules.exploit.SecretClose;
 import me.leeeaf.oakclient.systems.modules.movement.Blink;
@@ -78,7 +78,6 @@ public enum Category implements ICategory {
 
 	public static void addModule(Module module){
 		module.category.modules.add(module);
-		ModulesWithKeybinds.tryAddModule(module);
 	}
 
 	public static IClient getClient() {
@@ -91,5 +90,22 @@ public enum Category implements ICategory {
 			if(module!=null) return module;
 		}
 		return null;
+	}
+
+	public static boolean toggleModuleByKeybind(int key){
+		for(Category category : Category.values()){
+			for(IModule module: category.getModules().toList()){
+				KeybindSetting keybindSetting = (KeybindSetting) module.getSettings()
+						.filter(iSetting -> iSetting instanceof KeybindSetting)
+						.findFirst().orElse(null);
+				if(keybindSetting!=null && keybindSetting.getKey() != -1 && keybindSetting.getKey() == key){
+					if(module.isEnabled() != null){
+						module.isEnabled().toggle();
+					}
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

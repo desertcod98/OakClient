@@ -19,6 +19,7 @@
     "ClientPlayerEntityMixin",
     "EntityRendererMixin",
     "InGameHudMixin",
+    "KeyboardMixin",
     "LightmapTextureManagerMixin",
     "WorldRendererMixin"
   ],

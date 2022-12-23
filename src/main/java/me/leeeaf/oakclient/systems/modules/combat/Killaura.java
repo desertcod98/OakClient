@@ -3,7 +3,6 @@ package me.leeeaf.oakclient.systems.modules.combat;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
 import me.leeeaf.oakclient.gui.setting.EnumSetting;
-import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.EntityUtils;
@@ -15,7 +14,6 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.util.Hand;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,7 +28,6 @@ public class Killaura extends Module {
     private final BooleanSetting delay1_9 = new BooleanSetting("1.9 delay", "1.9 delay", "Should use 1.9 delay?", ()->true, true);
     private final BooleanSetting attackThroughBlocks = new BooleanSetting("Through blocks", "Through blocks", "Should attack through blocks?", ()->true, false);
     private final EnumSetting<SortMethod> sortMethod = new EnumSetting<>("Sort method", "SortMethod", "How to sort entities", () -> true, SortMethod.HEALTH, SortMethod.class);
-    public final KeybindSetting keybind=new KeybindSetting("Keybind","keybind","The key to toggle the module.",()->true, GLFW.GLFW_KEY_DELETE);
     private final BooleanSetting rotate = new BooleanSetting("Rotate", "rotate", "Rotates towards target", ()->true, true);
     private final EnumSetting<RotationMode> rotationMode = new EnumSetting<>("Rotation mode", "rotationMode", "How to rotate", ()->true, RotationMode.PACKET, RotationMode.class);
 
@@ -44,7 +41,6 @@ public class Killaura extends Module {
         settings.add(range);
         settings.add(delay1_9);
         settings.add(attackThroughBlocks);
-        settings.add(keybind);
         settings.add(sortMethod);
         settings.add(rotate);
         rotate.subSettings.add(rotationMode);
