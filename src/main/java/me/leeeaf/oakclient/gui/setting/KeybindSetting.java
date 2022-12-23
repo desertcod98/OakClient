@@ -6,6 +6,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.TranslatableTextContent;
 
 public class KeybindSetting extends Setting<Integer> implements IKeybindSetting {
+	//TODO KeybindSettings don't show the actual key in GUI, but instead they show 'translationkey' or something similar
 	public KeybindSetting (String displayName, String configName, String description, IBoolean visible, Integer value) {
 		super(displayName,configName,description,visible,value);
 	}
