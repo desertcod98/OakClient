@@ -34,7 +34,7 @@ public class Freecam extends Module {
     public void onTick() {
         super.onTick();
         mc.player.setOnGround(false);
-        mc.player.getAbilities().setFlySpeed(flySpeed.getValue()    *0.0015f);
+        mc.player.getAbilities().setFlySpeed(flySpeed.getValue()*0.0015f);
         mc.player.getAbilities().flying = true;
         mc.player.setPose(EntityPose.STANDING);
     }

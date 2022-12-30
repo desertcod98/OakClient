@@ -12,6 +12,7 @@ import me.leeeaf.oakclient.systems.modules.movement.Fly;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
 import me.leeeaf.oakclient.systems.modules.movement.Scaffold;
 import me.leeeaf.oakclient.systems.modules.player.*;
+import me.leeeaf.oakclient.systems.modules.render.ESP;
 import me.leeeaf.oakclient.systems.modules.render.HealthTags;
 import me.leeeaf.oakclient.systems.modules.render.Search;
 import me.leeeaf.oakclient.systems.modules.render.Tracers;
@@ -64,6 +65,7 @@ public enum Category implements ICategory {
 		addModule(new SafeWalk());
 		addModule(new Blink());
 		addModule(new Freecam());
+		addModule(new ESP());
 	}
 
 	@Override

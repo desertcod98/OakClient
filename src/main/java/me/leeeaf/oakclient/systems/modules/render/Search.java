@@ -25,6 +25,7 @@ public class Search extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
 
+    //TODO tracer color becomes black when blocks are too far
 
 
     public static Set<Block> searchTargets = new HashSet<>();

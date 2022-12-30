@@ -8,19 +8,18 @@ import me.leeeaf.oakclient.gui.setting.DoubleSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.renderer.Renderer;
-import me.leeeaf.oakclient.systems.renderer.color.LineColor;
+import me.leeeaf.oakclient.systems.renderer.color.QuadColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class Tracers extends Module {
+public class ESP extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
 
@@ -37,10 +36,9 @@ public class Tracers extends Module {
     private final BooleanSetting shouldTraceItemEntity = new BooleanSetting("Trace item entities", "traceItemEntities", "Should trace item entities?", ()->true, true);
     private final ColorSetting itemEntityColor = new ColorSetting("Item entities color", "itemEntityColor", "Color of the item entities tracers", ()->true,false,false, Color.CYAN,false);
 
-    //TODO add range setting
 
-    public Tracers() {
-        super("Tracers", "Renders lines to selected entities", ()->true, true, Category.RENDER);
+    public ESP() {
+        super("ESP", "Draws a box over selected entities", ()->true, true, Category.RENDER);
         settings.add(widthSetting);
         settings.add(opacitySetting);
         settings.add(shouldTracePlayers);
@@ -55,21 +53,12 @@ public class Tracers extends Module {
 
     @EventSubscribe
     public void onWorldRenderPost(WorldRenderEvent.Post event) {
-        float width = widthSetting.getValue().floatValue();
-        int opacity = (int) (opacitySetting.getValue()*255);
-
-        Vec3d vec2 = new Vec3d(0, 0, 75)
-                .rotateX(-(float) Math.toRadians(mc.gameRenderer.getCamera().getPitch()))
-                .rotateY(-(float) Math.toRadians(mc.gameRenderer.getCamera().getYaw()))
-                .add(mc.cameraEntity.getEyePos());
-        for (Entity e : mc.world.getEntities()) {
-            Color col = getColor(e);
-
-            if(col!=null){
-                Vec3d vec = e.getPos().subtract(Renderer.getInterpolationOffset(e));
-                LineColor lineColor =  LineColor.single(col.getRed(), col.getGreen(), col.getBlue(), opacity);
-                Renderer.drawLine(vec2.x, vec2.y, vec2.z, vec.x, vec.y, vec.z, lineColor, width);
-                Renderer.drawLine(vec.x, vec.y, vec.z, vec.x, vec.y + e.getHeight() * 0.9, vec.z, lineColor, width);
+        for(Entity e : mc.world.getEntities()){
+            Color color = getColor(e);
+            if(color!=null){
+                int opacity = (int) (opacitySetting.getValue()*255);
+                float width = widthSetting.getValue().floatValue();
+                Renderer.drawBoxOutline(e.getBoundingBox(), QuadColor.single(color.getRed(), color.getGreen(), color.getBlue(), opacity), width);
             }
         }
     }
