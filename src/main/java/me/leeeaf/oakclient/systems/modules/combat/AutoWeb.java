@@ -17,12 +17,15 @@ public class AutoWeb extends Module {
     private final BooleanSetting swapBack = new BooleanSetting("Swap back", "swapBack", "Swap back to previous item", () -> true, true);
     private final BooleanSetting airPlace = new BooleanSetting("Air place", "airPlace", "Places blocks in air", () -> true, false);
     private final DoubleSetting range = new DoubleSetting("Range", "range", "Range to search players in",()->true,0,5,4.5);
+    private final BooleanSetting rotate = new BooleanSetting("Rotate", "rotate", "Rotates towards target", ()->true, true);
+
 
     public AutoWeb() {
         super("AutoWeb", "Places webs on players", () -> true, true, Category.COMBAT);
         settings.add(swapBack);
         settings.add(airPlace);
         settings.add(range);
+        settings.add(rotate);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class AutoWeb extends Module {
                 if (BlockUtils.canPlace(player.getBlockPos(), false)) {
                     int prevSlot = mc.player.getInventory().selectedSlot;
                     InventoryUtils.selectSlot(webSlot);
-                    BlockUtils.place(player.getBlockPos(), webSlot, Hand.MAIN_HAND, true, true, true, airPlace.getValue());
+                    BlockUtils.place(player.getBlockPos(), webSlot, Hand.MAIN_HAND, rotate.getValue(), true, true, airPlace.getValue());
                     if (swapBack.getValue()) InventoryUtils.selectSlot(prevSlot);
                 }
             }

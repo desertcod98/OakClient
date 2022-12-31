@@ -66,6 +66,7 @@ public enum Category implements ICategory {
 		addModule(new Blink());
 		addModule(new Freecam());
 		addModule(new ESP());
+		addModule(new IgnoreServerPosition());
 	}
 
 	@Override

@@ -28,6 +28,5 @@ public class NoFall extends Module{
         if(event.packet instanceof PlayerMoveC2SPacket){
             ((PlayerMoveC2SPacketAccessor) event.packet).setOnGround(true);
         }
-
     }
 }
