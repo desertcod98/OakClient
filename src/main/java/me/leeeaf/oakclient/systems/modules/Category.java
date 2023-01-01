@@ -16,10 +16,7 @@ import me.leeeaf.oakclient.systems.modules.render.ESP;
 import me.leeeaf.oakclient.systems.modules.render.HealthTags;
 import me.leeeaf.oakclient.systems.modules.render.Search;
 import me.leeeaf.oakclient.systems.modules.render.Tracers;
-import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
-import me.leeeaf.oakclient.systems.modules.world.AntiWeather;
-import me.leeeaf.oakclient.systems.modules.world.Fullbright;
-import me.leeeaf.oakclient.systems.modules.world.XRay;
+import me.leeeaf.oakclient.systems.modules.world.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,6 +64,7 @@ public enum Category implements ICategory {
 		addModule(new Freecam());
 		addModule(new ESP());
 		addModule(new IgnoreServerPosition());
+		addModule(new EntityOwner());
 	}
 
 	@Override

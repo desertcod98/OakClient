@@ -5,7 +5,7 @@ import me.leeeaf.oakclient.systems.modules.Module;
 
 public class SafeWalk extends Module {
     public SafeWalk() {
-        super("SafeWalf", "Prevents you from falling off blocks",()->true, true, Category.MOVEMENT);
+        super("SafeWalk", "Prevents you from falling off blocks",()->true, true, Category.MOVEMENT);
         //logic handled in: ClientPlayerEntityMixin::clipAtLedge()
     }
 }
