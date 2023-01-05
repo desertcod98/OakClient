@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin <T extends Entity>{
-    @Shadow protected abstract boolean hasLabel(T entity);
 
     @Final
     @Shadow protected EntityRenderDispatcher dispatcher;
@@ -31,34 +30,9 @@ public abstract class EntityRendererMixin <T extends Entity>{
         }
     }
 
-
-
-
     @Inject(method = "render", at=@At("HEAD"))
     void onEntityLabelRender(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
         EventBus.getEventBus().post(new RenderEntityLabelEvent(entity, matrices, light, vertexConsumers, dispatcher));
     }
 
-    //TODO ugly code, make this two methods below better
-
-//    @Redirect(method = "render", at=@At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/EntityRenderer;hasLabel(Lnet/minecraft/entity/Entity;)Z"))
-//    boolean hasLabel(EntityRenderer instance, T entity){
-//        EntityOwner entityOwner = null;
-//        if((entityOwner = (EntityOwner) Category.getModule(EntityOwner.class)) != null && entityOwner.isEnabled().isOn()){
-//            String ownerUsername = entityOwner.entityToOwnerUsername.get(entity);
-//            return hasLabel(entity) || (ownerUsername != null && !ownerUsername.equals("Failed to resolve username")); //why this particular string? check EntityOwner
-//        }
-//        return hasLabel(entity);
-//    }
-
-//    @ModifyArgs(method = "render", at=@At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/EntityRenderer;renderLabelIfPresent(Lnet/minecraft/entity/Entity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"))
-//    void renderLableIfPresent(Args args){
-//        EntityOwner entityOwner = null;
-//        if((entityOwner = (EntityOwner) Category.getModule(EntityOwner.class)) != null && entityOwner.isEnabled().isOn()){
-//            String ownerUsername = entityOwner.entityToOwnerUsername.get(args.get(0));
-//            if(ownerUsername!=null){
-//                args.set(1, Text.of(ownerUsername));
-//            }
-//        }
-//    }
 }
