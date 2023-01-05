@@ -1,14 +1,17 @@
 package me.leeeaf.oakclient.systems.modules.world;
 
 import com.google.gson.JsonObject;
+import me.leeeaf.oakclient.event.EventSubscribe;
+import me.leeeaf.oakclient.event.events.render.RenderEntityLabelEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
+import me.leeeaf.oakclient.systems.renderer.text.TextRenderer;
+import me.leeeaf.oakclient.utils.net.Executor;
 import me.leeeaf.oakclient.utils.net.HttpManger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
@@ -27,8 +30,8 @@ public class EntityOwner extends Module {
         //and in EntityRendererMixin::hasLabel
     }
 
-    public final Map<Entity, String> entityToOwnerUsername = new HashMap<>();
     private final Map<UUID, String> playerUUIDToUsername = new HashMap<>();
+    private final Map<Entity, String> entityToOwnerUsername = new HashMap<>();
 
     @Override
     public void onTick() {
@@ -45,13 +48,19 @@ public class EntityOwner extends Module {
                 if(!Objects.equals(playerUUIDToUsername.get(ownerUUID), "Failed to resolve username")) {
                     String ownerUsername = resolvePlayerUUID(ownerUUID);
                     if (ownerUsername != null) {
-                        playerUUIDToUsername.put(ownerUUID, ownerUsername);
                         entityToOwnerUsername.put(entity, ownerUsername);
-                        entity.setCustomName(Text.literal(ownerUsername).formatted(Formatting.YELLOW)); //TODO make color an option
+//                        entity.setCustomName(Text.literal(ownerUsername).formatted(Formatting.YELLOW)); //TODO make color an option
                     }
                 }
             }
         }
+    }
+
+    @EventSubscribe
+    public void onRenderEntityLabel(RenderEntityLabelEvent event){
+        entityToOwnerUsername.forEach(((entity, s) -> {
+            TextRenderer.drawLabelOnEntity(s, Formatting.YELLOW, 1F, entity, event.matrices, event.light, event.vertexConsumers, event.dispatcher);
+        }));
     }
 
     private String resolvePlayerUUID(UUID playerUUID){
@@ -64,10 +73,13 @@ public class EntityOwner extends Module {
         if(username!=null) return username;
 
         //Else make a request to Mojang servers (doesn't work in cracked servers)
-        JsonObject response = HttpManger.GETJsonNoHeaders("https://sessionserver.mojang.com/session/minecraft/profile/"
-                +playerUUID.toString().replace("-", ""));
-        if(response!=null) return response.get("name").getAsString();
+        Executor.execute(()->{
+            JsonObject response = HttpManger.GETJson("https://sessionserver.mojang.com/session/minecraft/profile/"
+                    +playerUUID.toString().replace("-", ""));
+            if(response!=null) playerUUIDToUsername.put(playerUUID, response.get("name").getAsString());
+            else playerUUIDToUsername.put(playerUUID, "Failed to resolve username");
+        });
 
-        return "Failed to resolve username";
+        return null;
     }
 }

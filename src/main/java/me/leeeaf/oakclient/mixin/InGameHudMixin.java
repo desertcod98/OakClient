@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.mixin;
 
 import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.event.events.HudRenderEvent;
+import me.leeeaf.oakclient.event.events.render.HudRenderEvent;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;

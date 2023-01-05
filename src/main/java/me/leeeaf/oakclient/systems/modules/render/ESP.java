@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.event.EventSubscribe;
-import me.leeeaf.oakclient.event.events.WorldRenderEvent;
+import me.leeeaf.oakclient.event.events.render.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;

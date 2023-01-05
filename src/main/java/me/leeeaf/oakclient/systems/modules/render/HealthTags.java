@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.event.EventSubscribe;
-import me.leeeaf.oakclient.event.events.RenderLabelIfPresentEvent;
+import me.leeeaf.oakclient.event.events.render.RenderLabelIfPresentEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.LivingEntity;

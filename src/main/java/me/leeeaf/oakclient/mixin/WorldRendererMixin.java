@@ -2,7 +2,7 @@ package me.leeeaf.oakclient.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.leeeaf.oakclient.event.EventBus;
-import me.leeeaf.oakclient.event.events.WorldRenderEvent;
+import me.leeeaf.oakclient.event.events.render.WorldRenderEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;

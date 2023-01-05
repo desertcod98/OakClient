@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.renderer.color;
 
 import java.util.function.Function;
-
+//Credits to BleachHack (https://github.com/BleachDev/BleachHack/) for this file
 public class QuadColor extends RenderColor {
 
     private Function<Integer, int[]> getColorFunc;

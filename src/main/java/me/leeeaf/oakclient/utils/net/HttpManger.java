@@ -9,14 +9,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class HttpManger {
     private static final HttpClient httpClient = HttpClient.newBuilder().build();
     private static final Gson gson = new Gson();
 
-    public static JsonObject GETJsonNoHeaders(String url) {
+    public static JsonObject GETJson(String url) {
         HttpRequest request = null;
         try {
             request = HttpRequest.newBuilder()
@@ -34,7 +32,6 @@ public class HttpManger {
         return gson.fromJson(response.body(), JsonObject.class);
     }
 
-    //TODO create an async equivalent
     private static HttpResponse<String> request(HttpRequest request){
         try {
             return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -42,6 +39,4 @@ public class HttpManger {
             throw new RuntimeException(e);
         }
     }
-
-
 }

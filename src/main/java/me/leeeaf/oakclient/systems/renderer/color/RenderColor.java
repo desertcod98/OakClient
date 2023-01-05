@@ -1,6 +1,6 @@
 package me.leeeaf.oakclient.systems.renderer.color;
 
-
+//Credits to BleachHack (https://github.com/BleachDev/BleachHack/) for this file
 public abstract class RenderColor {
 
     protected Integer[] overwriteColor = new Integer[4];

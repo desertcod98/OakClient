@@ -6,7 +6,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.*;
 import org.apache.commons.lang3.ArrayUtils;
-
+//Credits to BleachHack (https://github.com/BleachDev/BleachHack/) for this file
 public class Vertexer {
 
     public static final int CULL_BACK = 0;

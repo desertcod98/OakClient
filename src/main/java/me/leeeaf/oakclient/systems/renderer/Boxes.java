@@ -5,6 +5,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.math.Vec3d;
 
+
+//Credits to BleachHack (https://github.com/BleachDev/BleachHack/) for this file
+
 public class Boxes {
 
     /** Returns the vector of the min pos of this box. **/

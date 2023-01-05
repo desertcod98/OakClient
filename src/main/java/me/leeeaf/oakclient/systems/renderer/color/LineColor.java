@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.renderer.color;
 
 import com.mojang.datafixers.util.Function4;
-
+//Credits to BleachHack (https://github.com/BleachDev/BleachHack/) for this file
 public class LineColor extends RenderColor implements Cloneable{
 
     private Function4<Float, Float, Float, Integer, int[]> getColorFunc;

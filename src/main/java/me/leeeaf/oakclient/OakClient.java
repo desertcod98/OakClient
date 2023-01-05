@@ -3,9 +3,9 @@ package me.leeeaf.oakclient;
 
 import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.EventSubscribe;
-import me.leeeaf.oakclient.event.events.HudRenderEvent;
 import me.leeeaf.oakclient.event.events.PostTickEvent;
 import me.leeeaf.oakclient.event.events.io.KeyEvent;
+import me.leeeaf.oakclient.event.events.render.HudRenderEvent;
 import me.leeeaf.oakclient.gui.ClickGUI;
 import me.leeeaf.oakclient.gui.module.ClickGUIModule;
 import me.leeeaf.oakclient.gui.module.HUDEditorModule;
@@ -18,6 +18,10 @@ import org.lwjgl.glfw.GLFW;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class OakClient implements ModInitializer {
+    public static String splashText = "OakClient";
+
+
+    //TODO create Friends system
     private static ClickGUI gui;
     private boolean inited=false;
     private final boolean keys[]=new boolean[266];

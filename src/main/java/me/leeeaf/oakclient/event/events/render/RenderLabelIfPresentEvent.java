@@ -1,4 +1,4 @@
-package me.leeeaf.oakclient.event.events;
+package me.leeeaf.oakclient.event.events.render;
 
 import me.leeeaf.oakclient.event.Event;
 import net.minecraft.entity.LivingEntity;

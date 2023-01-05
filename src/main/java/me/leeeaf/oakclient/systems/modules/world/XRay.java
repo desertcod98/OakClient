@@ -22,6 +22,7 @@ public class XRay extends Module {
         //some logic handled in: AbstractBlockMixin::getAmbientOcclusionLevel
         //and in               : LightmapTextureManagerMixin::update
         //TODO manage rendering of blockEntities and FernBlocks
+        //TODO make compatible with Sodium ecc.
     }
 
     @Override
