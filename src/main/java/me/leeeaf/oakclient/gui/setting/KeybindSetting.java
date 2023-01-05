@@ -4,9 +4,9 @@ import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.IKeybindSetting;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.TranslatableTextContent;
+import org.lwjgl.glfw.GLFW;
 
 public class KeybindSetting extends Setting<Integer> implements IKeybindSetting {
-	//TODO KeybindSettings don't show the actual key in GUI, but instead they show 'translationkey' or something similar
 	public KeybindSetting (String displayName, String configName, String description, IBoolean visible, Integer value) {
 		super(displayName,configName,description,visible,value);
 	}
@@ -22,14 +22,21 @@ public class KeybindSetting extends Setting<Integer> implements IKeybindSetting 
 
 	@Override
 	public void setKey (int key) {
-		setValue(key);
+		if(key == GLFW.GLFW_KEY_BACKSPACE || key == GLFW.GLFW_KEY_DELETE){
+			setValue(null);
+		}else{
+			setValue(key);
+		}
 	}
 
 	@Override
 	public String getKeyName() {
+		//TODO test if this ugly fix doesn't destroy stuff
 		String translationKey=InputUtil.Type.KEYSYM.createFromCode(getKey()).getTranslationKey();
-		String translation=new TranslatableTextContent(translationKey).toString();
-		if (!translation.equals(translationKey)) return translation;
-		return InputUtil.Type.KEYSYM.createFromCode(getKey()).getLocalizedText().getString();
+		return translationKey.substring(translationKey.lastIndexOf(".") + 1);
+
+//		String translation=new TranslatableTextContent(translationKey).toString();
+//		if (!translation.equals(translationKey)) return translation;
+//		return InputUtil.Type.KEYSYM.createFromCode(getKey()).getLocalizedText().getString();
 	}
 }

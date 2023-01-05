@@ -1,11 +1,11 @@
-package me.leeeaf.oakclient.systems.modules.world;
+package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 
 public class AntiWeather extends Module {
     public AntiWeather() {
-        super("Anti weather", "Removes rain, snowing, and thunder.", ()->true, true, Category.WORLD);
+        super("Anti weather", "Removes rain, snowing, and thunder.", ()->true, true, Category.RENDER);
         //logic handled in WorldMixin::isRaining, WorldMixin::isThundering
     }
 

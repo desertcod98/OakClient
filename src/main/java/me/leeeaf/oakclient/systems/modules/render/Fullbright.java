@@ -1,4 +1,4 @@
-package me.leeeaf.oakclient.systems.modules.world;
+package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
@@ -9,7 +9,7 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class Fullbright extends Module {
     public Fullbright() {
-        super("Fullbright", "Makes you a cat", ()->true, true, Category.WORLD);
+        super("Fullbright", "Makes you a cat", ()->true, true, Category.RENDER);
     }
 
     @Override

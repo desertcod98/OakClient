@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.mixin;
 
 import me.leeeaf.oakclient.systems.modules.Category;
-import me.leeeaf.oakclient.systems.modules.player.AntiWeb;
+import me.leeeaf.oakclient.systems.modules.movement.AntiWeb;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CobwebBlock;
 import net.minecraft.entity.Entity;

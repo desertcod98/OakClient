@@ -6,16 +6,10 @@ import com.lukflug.panelstudio.setting.IModule;
 import me.leeeaf.oakclient.gui.module.*;
 import me.leeeaf.oakclient.gui.setting.KeybindSetting;
 import me.leeeaf.oakclient.systems.modules.combat.*;
-import me.leeeaf.oakclient.systems.modules.exploit.SecretClose;
-import me.leeeaf.oakclient.systems.modules.movement.Blink;
-import me.leeeaf.oakclient.systems.modules.movement.Fly;
-import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
-import me.leeeaf.oakclient.systems.modules.movement.Scaffold;
+import me.leeeaf.oakclient.systems.modules.exploit.XCarry;
+import me.leeeaf.oakclient.systems.modules.movement.*;
 import me.leeeaf.oakclient.systems.modules.player.*;
-import me.leeeaf.oakclient.systems.modules.render.ESP;
-import me.leeeaf.oakclient.systems.modules.render.HealthTags;
-import me.leeeaf.oakclient.systems.modules.render.Search;
-import me.leeeaf.oakclient.systems.modules.render.Tracers;
+import me.leeeaf.oakclient.systems.modules.render.*;
 import me.leeeaf.oakclient.systems.modules.world.*;
 
 import java.util.ArrayList;
@@ -46,7 +40,7 @@ public enum Category implements ICategory {
 		addModule(new NoFall());
 		addModule(new Criticals());
 		addModule(new Killaura());
-		addModule(new SecretClose());
+		addModule(new XCarry());
 		addModule(new AntiCactus());
 		addModule(new Fullbright());
 		addModule(new AntiKnockback());

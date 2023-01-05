@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.mixin;
 
 import me.leeeaf.oakclient.systems.modules.Category;
-import me.leeeaf.oakclient.systems.modules.world.AntiWeather;
+import me.leeeaf.oakclient.systems.modules.render.AntiWeather;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

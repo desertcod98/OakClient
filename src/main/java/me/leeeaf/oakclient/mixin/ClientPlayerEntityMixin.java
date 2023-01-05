@@ -9,7 +9,7 @@ import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.modules.movement.SafeWalk;
 import me.leeeaf.oakclient.systems.modules.player.Freecam;
-import me.leeeaf.oakclient.systems.modules.player.Portals;
+import me.leeeaf.oakclient.systems.modules.world.Portals;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
