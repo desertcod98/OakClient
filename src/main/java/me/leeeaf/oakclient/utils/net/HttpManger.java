@@ -8,6 +8,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class HttpManger {
     private static final HttpClient httpClient = HttpClient.newBuilder().build();
@@ -18,6 +21,7 @@ public class HttpManger {
         try {
             request = HttpRequest.newBuilder()
                     .uri(new URI(url))
+                    .timeout(Duration.ofSeconds(5))
                     .GET()
                     .build();
         } catch (Exception e) {
@@ -30,13 +34,14 @@ public class HttpManger {
         return gson.fromJson(response.body(), JsonObject.class);
     }
 
+    //TODO create an async equivalent
     private static HttpResponse<String> request(HttpRequest request){
         try {
             return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }

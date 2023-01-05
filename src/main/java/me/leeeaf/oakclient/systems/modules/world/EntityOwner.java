@@ -8,6 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,14 +21,14 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 public class EntityOwner extends Module {
 
     public EntityOwner() {
+        //TODO this single handedly removes nametag mechanic when an entity has an owner ;) (probably have to redo the whole structure and mixins)
         super("EntityOwner", "Shows entities owners usernames", ()->true, true, Category.WORLD);
         //some logic handled in EntityRendererMixin::(ModifyArgs)renderLabelIfPresent
         //and in EntityRendererMixin::hasLabel
     }
 
-    public Map<Entity, String> entityToOwnerUsername = new HashMap<>();
-    private Map<UUID, String> playerUUIDToUsername = new HashMap<>();
-
+    public final Map<Entity, String> entityToOwnerUsername = new HashMap<>();
+    private final Map<UUID, String> playerUUIDToUsername = new HashMap<>();
 
     @Override
     public void onTick() {
@@ -45,6 +47,7 @@ public class EntityOwner extends Module {
                     if (ownerUsername != null) {
                         playerUUIDToUsername.put(ownerUUID, ownerUsername);
                         entityToOwnerUsername.put(entity, ownerUsername);
+                        entity.setCustomName(Text.literal(ownerUsername).formatted(Formatting.YELLOW)); //TODO make color an option
                     }
                 }
             }
@@ -63,8 +66,7 @@ public class EntityOwner extends Module {
         //Else make a request to Mojang servers (doesn't work in cracked servers)
         JsonObject response = HttpManger.GETJsonNoHeaders("https://sessionserver.mojang.com/session/minecraft/profile/"
                 +playerUUID.toString().replace("-", ""));
-        if(response!=null) return response.get("name").toString();
-
+        if(response!=null) return response.get("name").getAsString();
 
         return "Failed to resolve username";
     }

@@ -13,13 +13,13 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
-public class Criticals extends Module{
+public class Criticals extends Module {
     public Criticals() {
-        super("Criticals", "Tries to make every hit on entities critical", ()->true, true, Category.COMBAT);
+        //TODO bypass NCP ? :(
+        super("Criticals", "Tries to make every hit on entities critical", () -> true, true, Category.COMBAT);
         //code that needs to be triggered (class PlayerEntity):
         //boolean bl3 = bl && this.fallDistance > 0.0F && !this.onGround && !this.isClimbing() && !this.isTouchingWater() && !this.hasStatusEffect(StatusEffects.BLINDNESS) && !this.hasVehicle() && target instanceof LivingEntity;
     }
-
     @EventSubscribe
     public void onPacketSend(PacketEvent.Send event) {
         if (event.packet instanceof PlayerInteractEntityC2SPacket packet) {
@@ -56,4 +56,6 @@ public class Criticals extends Module{
             mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_SPRINTING));
         }
     }
+
 }
+

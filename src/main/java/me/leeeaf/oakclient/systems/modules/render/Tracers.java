@@ -5,6 +5,7 @@ import me.leeeaf.oakclient.event.events.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.BooleanSetting;
 import me.leeeaf.oakclient.gui.setting.ColorSetting;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
+import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.renderer.Renderer;
@@ -37,6 +38,8 @@ public class Tracers extends Module {
     private final BooleanSetting shouldTraceItemEntity = new BooleanSetting("Trace item entities", "traceItemEntities", "Should trace item entities?", ()->true, true);
     private final ColorSetting itemEntityColor = new ColorSetting("Item entities color", "itemEntityColor", "Color of the item entities tracers", ()->true,false,false, Color.CYAN,false);
 
+    private final IntegerSetting range = new IntegerSetting("Range", "range", "Range to search entities in", ()->true, 1, 32, 8);
+
     //TODO add range setting
 
     public Tracers() {
@@ -51,6 +54,7 @@ public class Tracers extends Module {
         shouldTraceHostileEntity.subSettings.add(hostileEntityColor);
         settings.add(shouldTraceItemEntity);
         shouldTraceItemEntity.subSettings.add(itemEntityColor);
+        settings.add(range);
     }
 
     @EventSubscribe
@@ -75,6 +79,9 @@ public class Tracers extends Module {
     }
 
     private Color getColor(Entity e) {
+        if(mc.player.squaredDistanceTo(e) > (range.getValue() * 16)*(range.getValue() * 16)){
+            return null;
+        }
         if(e == mc.player) return null;
         if(e instanceof PassiveEntity && shouldTracePacificEntity.getValue()) return pacificEntityColor.getColor();
         if(e instanceof Monster && shouldTraceHostileEntity.getValue()) return hostileEntityColor.getColor();

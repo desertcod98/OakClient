@@ -1,7 +1,7 @@
 package me.leeeaf.oakclient.systems.modules.render;
 
 import me.leeeaf.oakclient.event.EventSubscribe;
-import me.leeeaf.oakclient.event.events.RenderLableIfPresentEvent;
+import me.leeeaf.oakclient.event.events.RenderLabelIfPresentEvent;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +15,7 @@ public class HealthTags extends Module {
     }
 
     @EventSubscribe
-    public void onRenderLableIfPresent(RenderLableIfPresentEvent event) {
+    public void onRenderLabelIfPresent(RenderLabelIfPresentEvent event) {
         LivingEntity entity = event.entity;
         Text text = event.lableText;
         int health = (int) entity.getHealth();

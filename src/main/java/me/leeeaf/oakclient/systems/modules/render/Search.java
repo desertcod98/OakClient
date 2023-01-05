@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.WorldRenderEvent;
 import me.leeeaf.oakclient.gui.setting.DoubleSetting;
+import me.leeeaf.oakclient.gui.setting.IntegerSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.systems.renderer.Renderer;
@@ -25,8 +26,10 @@ public class Search extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);
     private final DoubleSetting opacitySetting = new DoubleSetting("Opacity", "opacity", "Opacity of tracers", ()->true, 0,1,0.75);
 
-    //TODO tracer color becomes black when blocks are too far
+    private final IntegerSetting range = new IntegerSetting("Range", "range", "Range to search entities in", ()->true, 1, 32, 8);
 
+    //TODO tracer color becomes black when blocks are too far
+    //TODO add option for ESP
 
     public static Set<Block> searchTargets = new HashSet<>();
     private Set<BlockPos> foundBlocks = Sets.newConcurrentHashSet();
@@ -63,6 +66,7 @@ public class Search extends Module {
         super("Search", "Searchs  for specified blocks (command .search)", ()->true, true, Category.RENDER);
         settings.add(opacitySetting);
         settings.add(widthSetting);
+        settings.add(range);
     }
 
     @Override
@@ -96,6 +100,9 @@ public class Search extends Module {
                 .rotateY(-(float) Math.toRadians(mc.gameRenderer.getCamera().getYaw()))
                 .add(mc.cameraEntity.getEyePos());
         for(BlockPos blockPos : foundBlocks){
+            if(mc.player.squaredDistanceTo(blockPos.getX(),blockPos.getY(),blockPos.getZ()) > (range.getValue()*16) * (range.getValue()*16)){
+                continue;
+            }
             int[] col = getBlockColor(mc.world.getBlockState(blockPos), blockPos);
             LineColor lineColor =  LineColor.single(col[0], col[1], col[2], (int)(opacitySetting.getValue()*255));
             Renderer.drawLine(camVec.x, camVec.y, camVec.z, blockPos.getX(), blockPos.getY(), blockPos.getZ(), lineColor, widthSetting.getValue().floatValue());
