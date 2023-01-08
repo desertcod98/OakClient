@@ -10,7 +10,10 @@ import me.leeeaf.oakclient.systems.modules.exploit.XCarry;
 import me.leeeaf.oakclient.systems.modules.movement.*;
 import me.leeeaf.oakclient.systems.modules.player.*;
 import me.leeeaf.oakclient.systems.modules.render.*;
-import me.leeeaf.oakclient.systems.modules.world.*;
+import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
+import me.leeeaf.oakclient.systems.modules.world.EntityOwner;
+import me.leeeaf.oakclient.systems.modules.world.Portals;
+import me.leeeaf.oakclient.systems.modules.world.XRay;
 
 import java.util.ArrayList;
 import java.util.Arrays;

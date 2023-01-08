@@ -5,7 +5,6 @@ import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.PacketEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
@@ -20,6 +19,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class ChunkProcessor {
     private ExecutorService executor;
@@ -55,7 +56,7 @@ public class ChunkProcessor {
 
     @EventSubscribe
     public void onPacketRecieve(PacketEvent.Receive event) {
-        if(MinecraftClient.getInstance().world ==null){
+        if(mc.world ==null){
             return;
         }
 
@@ -76,7 +77,7 @@ public class ChunkProcessor {
             });
         } else if (loadChunkConsumer != null && packet instanceof ChunkDataS2CPacket) {
             ChunkPos cp = new ChunkPos(((ChunkDataS2CPacket) packet).getX(), ((ChunkDataS2CPacket) packet).getZ());
-            WorldChunk chunk = new WorldChunk(MinecraftClient.getInstance().world, cp);
+            WorldChunk chunk = new WorldChunk(mc.world, cp);
             chunk.loadFromPacket(((ChunkDataS2CPacket) packet).getChunkData().getSectionsDataBuf(), new NbtCompound(), ((ChunkDataS2CPacket) packet).getChunkData().getBlockEntities(((ChunkDataS2CPacket) packet).getX(), ((ChunkDataS2CPacket) packet).getZ()));
             executor.execute(() -> loadChunkConsumer.accept(chunk));
         }

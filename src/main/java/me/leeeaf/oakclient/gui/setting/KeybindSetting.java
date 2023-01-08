@@ -3,7 +3,6 @@ package me.leeeaf.oakclient.gui.setting;
 import com.lukflug.panelstudio.base.IBoolean;
 import com.lukflug.panelstudio.setting.IKeybindSetting;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.TranslatableTextContent;
 import org.lwjgl.glfw.GLFW;
 
 public class KeybindSetting extends Setting<Integer> implements IKeybindSetting {
@@ -31,10 +30,11 @@ public class KeybindSetting extends Setting<Integer> implements IKeybindSetting 
 
 	@Override
 	public String getKeyName() {
-		//TODO test if this ugly fix doesn't destroy stuff
+		//this works but is there a better way to do it?
 		String translationKey=InputUtil.Type.KEYSYM.createFromCode(getKey()).getTranslationKey();
-		return translationKey.substring(translationKey.lastIndexOf(".") + 1);
+		return translationKey.substring(translationKey.lastIndexOf(".") + 1).toUpperCase();
 
+		//Old code from PanelStudio library for reference
 //		String translation=new TranslatableTextContent(translationKey).toString();
 //		if (!translation.equals(translationKey)) return translation;
 //		return InputUtil.Type.KEYSYM.createFromCode(getKey()).getLocalizedText().getString();
