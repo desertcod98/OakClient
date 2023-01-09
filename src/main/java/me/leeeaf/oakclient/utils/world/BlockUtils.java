@@ -38,12 +38,12 @@ public class BlockUtils {
     public static boolean canPlace(BlockPos blockPos, boolean checkEntities) {
         if(blockPos==null) return false;
         if(!World.isValid(blockPos)) return false;
-        if (!mc.world.getBlockState(blockPos).getMaterial().isReplaceable()) return false; //todo check Material class
-        return !checkEntities || mc.world.canPlace(mc.world.getBlockState(blockPos), blockPos, ShapeContext.absent()); //todo ShapeContext???
+        if (!mc.world.getBlockState(blockPos).getMaterial().isReplaceable()) return false;
+        return !checkEntities || mc.world.canPlace(mc.world.getBlockState(blockPos), blockPos, ShapeContext.absent());
     }
 
     private static void place(BlockHitResult blockHitResult, Hand hand, boolean swing){
-        boolean wasSneaking = mc.player.input.sneaking; //why cant sneak? todo
+        boolean wasSneaking = mc.player.input.sneaking; //why no sneak :(
         mc.player.input.sneaking = false;
         ActionResult result = mc.interactionManager.interactBlock(mc.player, hand, blockHitResult);
         if (result.shouldSwingHand()) {

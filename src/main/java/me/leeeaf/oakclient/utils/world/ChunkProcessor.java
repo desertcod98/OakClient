@@ -25,9 +25,9 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 public class ChunkProcessor {
     private ExecutorService executor;
 
-    private int threads;
-    private Consumer<WorldChunk> loadChunkConsumer;
-    private BiConsumer<BlockPos, BlockState> updateBlockConsumer;
+    private final int threads;
+    private final Consumer<WorldChunk> loadChunkConsumer;
+    private final BiConsumer<BlockPos, BlockState> updateBlockConsumer;
 
     public ChunkProcessor(int threads, Consumer<WorldChunk> loadChunkConsumer, BiConsumer<BlockPos, BlockState> updateBlockConsumer) {
         this.threads = threads;
@@ -55,7 +55,7 @@ public class ChunkProcessor {
     }
 
     @EventSubscribe
-    public void onPacketRecieve(PacketEvent.Receive event) {
+    public void onPacketReceive(PacketEvent.Receive event) {
         if(mc.world ==null){
             return;
         }

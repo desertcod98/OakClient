@@ -24,7 +24,6 @@ public class OakClient implements ModInitializer {
     //TODO create Friends system
     private static ClickGUI gui;
     private boolean inited=false;
-    private final boolean keys[]=new boolean[266];
     @Override
     public void onInitialize() {
         Category.init();
@@ -46,24 +45,9 @@ public class OakClient implements ModInitializer {
     @EventSubscribe
     public void onPostTick(PostTickEvent event){
         if (!inited) {
-            for (int i=32;i<keys.length;i++) keys[i]= GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS;
             gui=new ClickGUI();
             inited=true;
         }
-//        if(mc.currentScreen == null){
-//            for (int i=32;i<keys.length;i++) {
-//                if (keys[i]!=(GLFW.glfwGetKey(MinecraftClient.getInstance().getWindow().getHandle(),i)==GLFW.GLFW_PRESS)) {
-//                    keys[i]=!keys[i];
-//                    if (keys[i]) {
-//
-//                        ModulesWithKeybinds.toggleIfKeybind(i);
-//                        if (i==ClickGUIModule.keybind.getKey()) gui.enterGUI();
-//                        if (i==HUDEditorModule.keybind.getKey()) gui.enterHUDEditor();
-//                        gui.handleKeyEvent(i);
-//                    }
-//                }
-//            }
-//        }
     }
 
     @EventSubscribe

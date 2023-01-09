@@ -10,7 +10,7 @@ public class ReloadCommand extends Command {
     }
 
     @Override
-    public void excecute(String[] args) {
+    public void execute(String[] args) {
         mc.worldRenderer.reload();
     }
 }

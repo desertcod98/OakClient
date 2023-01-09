@@ -16,7 +16,7 @@ public class FakePlayer extends OtherClientPlayerEntity {
         setHealth(20);
         setUuid(UUID.randomUUID());
     }
-    public void spawn(){ //todo first time calling method model does not spawn
+    public void spawn(){
         unsetRemoved();
         mc.world.addEntity(getId(), this);
     }

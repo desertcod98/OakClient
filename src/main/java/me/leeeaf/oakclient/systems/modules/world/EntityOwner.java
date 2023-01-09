@@ -24,7 +24,7 @@ import static me.leeeaf.oakclient.OakClientClient.mc;
 public class EntityOwner extends Module {
 
     public EntityOwner() {
-        //TODO this single handedly removes nametag mechanic when an entity has an owner ;) (probably have to redo the whole structure and mixins)
+        //TODO make tag color an option
         super("EntityOwner", "Shows entities owners usernames", ()->true, true, Category.WORLD);
         //some logic handled in EntityRendererMixin::(ModifyArgs)renderLabelIfPresent
         //and in EntityRendererMixin::hasLabel
@@ -49,7 +49,6 @@ public class EntityOwner extends Module {
                     String ownerUsername = resolvePlayerUUID(ownerUUID);
                     if (ownerUsername != null) {
                         entityToOwnerUsername.put(entity, ownerUsername);
-//                        entity.setCustomName(Text.literal(ownerUsername).formatted(Formatting.YELLOW)); //TODO make color an option
                     }
                 }
             }
@@ -58,9 +57,7 @@ public class EntityOwner extends Module {
 
     @EventSubscribe
     public void onRenderEntityLabel(RenderEntityLabelEvent event){
-        entityToOwnerUsername.forEach(((entity, s) -> {
-            TextRenderer.drawLabelOnEntity(s, Formatting.YELLOW, 1F, entity, event.matrices, event.light, event.vertexConsumers, event.dispatcher);
-        }));
+        entityToOwnerUsername.forEach(((entity, s) -> TextRenderer.drawLabelOnEntity(s, Formatting.YELLOW, 1F, entity, event.matrices, event.light, event.vertexConsumers, event.dispatcher)));
     }
 
     private String resolvePlayerUUID(UUID playerUUID){

@@ -14,10 +14,11 @@ import static me.leeeaf.oakclient.systems.modules.world.XRay.blocksToRender;
 
 public class XrayCommand extends Command {
     public XrayCommand() {
+        //TODO modifying list reloads the world render even if xray is disabled
         super("xray", "Manages blocks to see with xray", new String[]{"xray", "xrayblocks"}, new Command[]{
                 new Command("list", "show enabled targets", new String[]{"list"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(blocksToRender.size()>0){
                             mc.player.sendMessage(Text.literal("Targets:").formatted(Formatting.GREEN));
                             for(Block block: blocksToRender){
@@ -30,7 +31,7 @@ public class XrayCommand extends Command {
                 },
                 new Command("add", "adds target", new String[]{"add"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(args.length>0){
                             Identifier blockToAddId = new Identifier(args[0]);
                             Block blockToAdd = Registry.BLOCK.get(blockToAddId);
@@ -52,7 +53,7 @@ public class XrayCommand extends Command {
                 },
                 new Command("remove", "removes target", new String[]{"remove"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(args.length>0){
                             Identifier blockToRemoveId = new Identifier(args[0]);
                             Block blockToRemove = Registry.BLOCK.get(blockToRemoveId);
@@ -67,8 +68,8 @@ public class XrayCommand extends Command {
                 },
                 new Command("clear", "clears target list", new String[]{"clear"}, null) {
                     @Override
-                    public void excecute(String[] args) {
-                        blocksToRender.clear(); //todo test
+                    public void execute(String[] args) {
+                        blocksToRender.clear();
                         mc.player.sendMessage(Text.of("Xray target list cleared!"));
                         mc.worldRenderer.reload();
                     }
@@ -77,11 +78,11 @@ public class XrayCommand extends Command {
     }
 
     @Override
-    public void excecute(String[] args) {
+    public void execute(String[] args) {
         if(args.length>0){
             for(Command arg : possibleArgs){
                 if(Arrays.stream(arg.triggers).anyMatch(s -> s.equalsIgnoreCase(args[0]))){
-                    arg.excecute(Arrays.copyOfRange(args,1,args.length));
+                    arg.execute(Arrays.copyOfRange(args,1,args.length));
                 }
             }
         }else{

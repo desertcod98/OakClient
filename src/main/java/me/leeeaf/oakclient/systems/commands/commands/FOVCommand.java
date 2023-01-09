@@ -11,7 +11,7 @@ public class FOVCommand extends Command {
 
 
     @Override
-    public void excecute(String[] args) {
+    public void execute(String[] args) {
         try{
             int fov = Integer.parseInt(args[0]);
             if(fov >= 30 && fov <= 110) {

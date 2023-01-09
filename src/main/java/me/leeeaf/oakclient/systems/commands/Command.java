@@ -22,7 +22,7 @@ public abstract class Command {
         }
     }
 
-    public abstract void excecute(String[] args);
+    public abstract void execute(String[] args);
     @Override
     public String toString(){
         return name+" : "+description;
@@ -37,7 +37,7 @@ public abstract class Command {
         MutableText helpMessage = Text.literal(prefix).append(toText().copy());
         if(possibleArgs.size()>0){
             for(Command arg : possibleArgs){
-                helpMessage.append("\n").append(prefix).append(arg.helpMessage(prefixLength+1)); //todo wrong, shows too many "-" :(
+                helpMessage.append("\n").append(prefix).append(arg.helpMessage(prefixLength+1)); //TODO wrong, shows too many "-" :(
             }
         }
         return helpMessage;

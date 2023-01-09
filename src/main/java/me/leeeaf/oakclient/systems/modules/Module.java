@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public abstract class Module implements IModule {
-	//TODO IMPORTANT, every module should have a keybind setting
 	public final String displayName,description;
 	public final IBoolean visible;
 	public final Category category;
@@ -74,15 +73,15 @@ public abstract class Module implements IModule {
 		if(subscribed){
 			EventBus.getEventBus().unsubscribe(this);
 		}
-	};
+	}
 
 	public void onEnable(){
 		if(EventBus.getEventBus().subscribe(this)){
 			subscribed = true;
 		}
-	};
+	}
 
-	public void onTick(){};
+	public void onTick(){}
 
 	@Override
 	public Stream<ISetting<?>> getSettings() {

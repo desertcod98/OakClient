@@ -40,7 +40,6 @@ public class Tracers extends Module {
 
     private final IntegerSetting range = new IntegerSetting("Range", "range", "Range to search entities in", ()->true, 1, 32, 8);
 
-    //TODO add range setting
 
     public Tracers() {
         super("Tracers", "Renders lines to selected entities", ()->true, true, Category.RENDER);

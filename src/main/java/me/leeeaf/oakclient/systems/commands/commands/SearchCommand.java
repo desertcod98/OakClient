@@ -18,7 +18,7 @@ public class SearchCommand extends Command {
         super("search", "Manages search targets (blocks)", new String[]{"search"}, new Command[]{
                 new Command("list", "show enabled targets", new String[]{"list"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(searchTargets.size()>0){
                             mc.player.sendMessage(Text.literal("Targets:").formatted(Formatting.GREEN));
                             for(Block block: searchTargets){
@@ -31,7 +31,7 @@ public class SearchCommand extends Command {
                 },
                 new Command("add", "adds target", new String[]{"add"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(args.length>0){
                             Identifier blockToAddId = new Identifier(args[0]);
                             Block blockToAdd = Registry.BLOCK.get(blockToAddId);
@@ -52,7 +52,7 @@ public class SearchCommand extends Command {
                 },
                 new Command("remove", "removes target", new String[]{"remove"}, null) {
                     @Override
-                    public void excecute(String[] args) {
+                    public void execute(String[] args) {
                         if(args.length>0){
                             Identifier blockToRemoveId = new Identifier(args[0]);
                             Block blockToRemove = Registry.BLOCK.get(blockToRemoveId);
@@ -66,8 +66,8 @@ public class SearchCommand extends Command {
                 },
                 new Command("clear", "clears target list", new String[]{"clear"}, null) {
                     @Override
-                    public void excecute(String[] args) {
-                        searchTargets.clear(); //todo test
+                    public void execute(String[] args) {
+                        searchTargets.clear();
                         mc.player.sendMessage(Text.of("Search target list cleared!"));
                     }
                 },
@@ -75,11 +75,11 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public void excecute(String[] args) {
+    public void execute(String[] args) {
         if(args.length>0){
             for(Command arg : possibleArgs){
                 if(Arrays.stream(arg.triggers).anyMatch(s -> s.equalsIgnoreCase(args[0]))){
-                    arg.excecute(Arrays.copyOfRange(args,1,args.length));
+                    arg.execute(Arrays.copyOfRange(args,1,args.length));
                 }
             }
         }else{

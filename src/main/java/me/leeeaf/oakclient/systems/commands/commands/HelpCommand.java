@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void excecute(String[] args) {
+    public void execute(String[] args) {
         Command helpCommand;
         if(args.length >0 ){
             if(args[0].equalsIgnoreCase("commands")){

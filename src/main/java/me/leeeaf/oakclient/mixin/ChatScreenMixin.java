@@ -32,7 +32,7 @@ public class ChatScreenMixin {
             if(toRun == null){
                 MinecraftClient.getInstance().player.sendMessage(Text.of("Command not found"));
             }else{
-                toRun.excecute(args);
+                toRun.execute(args);
             }
         }else{
             instance.sendChatMessage(message, preview);
