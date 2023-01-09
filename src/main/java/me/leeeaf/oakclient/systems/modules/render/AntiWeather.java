@@ -8,19 +8,4 @@ public class AntiWeather extends Module {
         super("Anti weather", "Removes rain, snowing, and thunder.", ()->true, true, Category.RENDER);
         //logic handled in WorldMixin::isRaining, WorldMixin::isThundering
     }
-
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public void onEnable() {
-
-    }
-
-    @Override
-    public void onTick() {
-
-    }
 }

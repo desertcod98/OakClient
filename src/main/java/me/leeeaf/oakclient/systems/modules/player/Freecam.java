@@ -1,5 +1,6 @@
 package me.leeeaf.oakclient.systems.modules.player;
 
+import me.leeeaf.oakclient.event.EventPriority;
 import me.leeeaf.oakclient.event.EventSubscribe;
 import me.leeeaf.oakclient.event.events.ClientMoveEvent;
 import me.leeeaf.oakclient.event.events.PacketEvent;
@@ -69,7 +70,7 @@ public class Freecam extends Module {
         mc.player.noClip = true;
     }
 
-    @EventSubscribe
+    @EventSubscribe(priority = EventPriority.HIGH)
     public void onPacketSend(PacketEvent.Send event){
         if(event.packet instanceof PlayerMoveC2SPacket || event.packet instanceof ClientCommandC2SPacket){
             event.cancel();

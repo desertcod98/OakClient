@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class EventSubscriber {
-    private Method method;
-    private Object listenerInstance;
+    private final Method method;
+    private final Object listenerInstance;
 
     public EventSubscriber(Method method, Object listenerInstance) {
         this.method = method;
@@ -24,5 +24,9 @@ public class EventSubscriber {
 
     public Object getListenerInstance(){
         return listenerInstance;
+    }
+
+    public int getEventPriorityValue(){
+        return method.getAnnotation(EventSubscribe.class).priority().getValue();
     }
 }

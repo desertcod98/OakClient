@@ -1,9 +1,7 @@
 package me.leeeaf.oakclient.event;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class EventBus {
     private static EventBus eventBus;
@@ -16,7 +14,12 @@ public class EventBus {
     }
 
     private final HashMap<Class<?>, List<EventSubscriber>> subscribersMap = new HashMap<>();
-    private EventBus(){}
+
+    Comparator<EventSubscriber> subscriberComparator;
+    private EventBus(){
+        subscriberComparator = Comparator.comparingInt(EventSubscriber::getEventPriorityValue).reversed();
+
+    }
 
 
     public <T> T post(T event){
@@ -40,7 +43,11 @@ public class EventBus {
     }
 
     private void insert(List<EventSubscriber> subscribers, EventSubscriber subscriber){
-        subscribers.add(subscriber);
+        int index = Collections.binarySearch(subscribers, subscriber, subscriberComparator);
+        if (index < 0) {
+            index = -index - 1;
+        }
+        subscribers.add(index,subscriber);
     }
 
     public void unsubscribe(Object eventListener){
