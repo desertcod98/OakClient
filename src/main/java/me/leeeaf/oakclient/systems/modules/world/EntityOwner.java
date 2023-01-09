@@ -31,33 +31,26 @@ public class EntityOwner extends Module {
     }
 
     private final Map<UUID, String> playerUUIDToUsername = new HashMap<>();
-    private final Map<Entity, String> entityToOwnerUsername = new HashMap<>();
-
-    @Override
-    public void onTick() {
-        super.onTick();
-        for(Entity entity : mc.world.getEntities()){
-            UUID ownerUUID = null;
-            if(entity instanceof TameableEntity tameableEntity) ownerUUID = tameableEntity.getOwnerUuid();
-            else if(entity instanceof AbstractHorseEntity abstractHorseEntity) ownerUUID = abstractHorseEntity.getOwnerUuid();
-            if(ownerUUID != null){
-                //if Mojang response in resolvePlayerUUID is null, we are going to send a request every tick which is useless,
-                //so we set the String in the hashmap to "Failed to resolve username" (because we can't set it to null, as
-                //we wouldn't have a way to check if the UUID hasn't been resolved yet or if the Mojang response was null.
-                //We are forced to use a String like this because the hashmap is <UUID, String>
-                if(!Objects.equals(playerUUIDToUsername.get(ownerUUID), "Failed to resolve username")) {
-                    String ownerUsername = resolvePlayerUUID(ownerUUID);
-                    if (ownerUsername != null) {
-                        entityToOwnerUsername.put(entity, ownerUsername);
-                    }
-                }
-            }
-        }
-    }
 
     @EventSubscribe
     public void onRenderEntityLabel(RenderEntityLabelEvent event){
-        entityToOwnerUsername.forEach(((entity, s) -> TextRenderer.drawLabelOnEntity(s, Formatting.YELLOW, 1F, entity, event.matrices, event.light, event.vertexConsumers, event.dispatcher)));
+        Entity entity = event.entity;
+        UUID ownerUUID = null;
+        if(entity instanceof TameableEntity tameableEntity) ownerUUID = tameableEntity.getOwnerUuid();
+        else if(entity instanceof AbstractHorseEntity abstractHorseEntity) ownerUUID = abstractHorseEntity.getOwnerUuid();
+        if(ownerUUID != null){
+            //if Mojang response in resolvePlayerUUID is null, we are going to send a request every tick which is useless,
+            //so we set the String in the hashmap to "Failed to resolve username" (because we can't set it to null, as
+            //we wouldn't have a way to check if the UUID hasn't been resolved yet or if the Mojang response was null.
+            //We are forced to use a String like this because the hashmap is <UUID, String>
+            if(!Objects.equals(playerUUIDToUsername.get(ownerUUID), "Failed to resolve username")) {
+                String ownerUsername = resolvePlayerUUID(ownerUUID);
+                if (ownerUsername != null) {
+                    TextRenderer.drawLabelOnEntity(ownerUsername, Formatting.YELLOW, 1F, entity, event.matrices, event.light, event.vertexConsumers, event.dispatcher);
+                }
+            }
+        }
+
     }
 
     private String resolvePlayerUUID(UUID playerUUID){

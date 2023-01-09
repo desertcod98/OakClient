@@ -9,6 +9,7 @@ import java.util.UUID;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class FakePlayer extends OtherClientPlayerEntity {
+    //TODO copy player proprieties (skin ecc)
     public FakePlayer(PlayerEntity player){
         super(mc.world, player.getGameProfile(), null);
         copyPositionAndRotation(player);
