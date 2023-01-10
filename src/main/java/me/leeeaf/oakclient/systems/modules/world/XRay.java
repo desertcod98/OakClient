@@ -17,12 +17,14 @@ public class XRay extends Module {
             Blocks.LAPIS_ORE
     ));
 
+
     public XRay() {
         super("XRay", "Only renders certain blocks", ()->true, true, Category.WORLD);
         //some logic handled in: AbstractBlockMixin::getAmbientOcclusionLevel
         //and in               : LightmapTextureManagerMixin::update
         //TODO manage rendering of blockEntities and FernBlocks
         //TODO make compatible with Sodium ecc.
+
     }
 
     @Override
@@ -35,11 +37,6 @@ public class XRay extends Module {
     public void onEnable() {
         mc.chunkCullingEnabled = false;
         mc.worldRenderer.reload();
-    }
-
-
-    @Override
-    public void onTick() {
     }
 
     public boolean shouldRenderSide(Block block){
