@@ -8,6 +8,7 @@ import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 
 public class AntiHunger extends Module {
     public AntiHunger() {
+        //TODO if you are in liquids in servers it creates problems
         super("AntiHunger", "REDUCES hunger consumption", ()->true, true, Category.PLAYER);
     }
 

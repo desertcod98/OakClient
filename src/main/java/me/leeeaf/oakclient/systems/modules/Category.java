@@ -36,7 +36,6 @@ public enum Category implements ICategory {
 		addModule(new HUDEditorModule());
 		addModule(new LogoModule());
 		addModule(new WatermarkModule());
-		addModule(new Clicker());
 		addModule(new AntiHunger());
 		addModule(new Fly());
 		addModule(new ChestStealer());

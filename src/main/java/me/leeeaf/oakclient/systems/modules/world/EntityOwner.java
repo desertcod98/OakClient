@@ -64,6 +64,7 @@ public class EntityOwner extends Module {
 
         //Else make a request to Mojang servers (doesn't work in cracked servers)
         Executor.execute(()->{
+            playerUUIDToUsername.put(playerUUID, "Loading...");
             JsonObject response = HttpManger.GETJson("https://sessionserver.mojang.com/session/minecraft/profile/"
                     +playerUUID.toString().replace("-", ""));
             if(response!=null) playerUUIDToUsername.put(playerUUID, response.get("name").getAsString());
