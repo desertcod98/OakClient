@@ -30,55 +30,56 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 
-    @Shadow @Final protected MinecraftClient client;
+    @Shadow
+    @Final
+    protected MinecraftClient client;
 
-    @Shadow public abstract boolean isSneaking();
+    @Shadow
+    public abstract boolean isSneaking();
 
     public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) {
         super(world, profile, publicKey);
     }
 
     @Inject(method = "pushOutOfBlocks", at = @At("HEAD"), cancellable = true)
-    void onPushOutOfBlocks(double x, double z, CallbackInfo ci){
-        Module freecam =  Category.getModule(Freecam.class);
-        if(freecam != null && freecam.isEnabled().isOn()) ci.cancel();
+    void onPushOutOfBlocks(double x, double z, CallbackInfo ci) {
+        Module freecam = Category.getModule(Freecam.class);
+        if (freecam != null && freecam.isEnabled().isOn()) ci.cancel();
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    void postTick(CallbackInfo ci){
+    void postTick(CallbackInfo ci) {
         EventBus.getEventBus().post(new PostTickEvent());
         Category.getClient().getCategories().forEach(category -> {
-            category.getModules().forEach(module->{
-                if(module.isEnabled() != null && module.isEnabled().isOn()){
+            category.getModules().forEach(module -> {
+                if (module.isEnabled() != null && module.isEnabled().isOn()) {
                     ((Module) module).onTick();
                 }
             });
         });
     }
 
-    @Redirect(method = "updateNausea", at=@At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;currentScreen:Lnet/minecraft/client/gui/screen/Screen;"))
-    Screen updateNausea(MinecraftClient instance){
-        Portals portals = (Portals) Category.PLAYER.getModules().filter(iModule -> iModule instanceof Portals).findFirst().orElse(null);
-        if(portals!=null && portals.isEnabled().isOn()){
+    @Redirect(method = "updateNausea", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;currentScreen:Lnet/minecraft/client/gui/screen/Screen;"))
+    Screen updateNausea(MinecraftClient instance) {
+        Portals portals = (Portals) Category.getModule(Portals.class);
+        if (portals != null && portals.isEnabled().isOn()) {
             return null;
-        }else{
+        } else {
             return client.currentScreen;
         }
     }
 
-    @Inject(method = "move", at=@At("HEAD"), cancellable = true)
-    void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci){
-        if(EventBus.getEventBus().post(new ClientMoveEvent()).isCancelled()){
+    @Inject(method = "move", at = @At("HEAD"), cancellable = true)
+    void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci) {
+        if (EventBus.getEventBus().post(new ClientMoveEvent()).isCancelled()) {
             ci.cancel();
         }
     }
 
     @Override
     protected boolean clipAtLedge() {
-        SafeWalk safeWalk = (SafeWalk) Category.MOVEMENT.getModules()
-                .filter(iModule -> iModule instanceof SafeWalk)
-                .findFirst().orElse(null);
-        if(safeWalk != null && safeWalk.isEnabled().isOn()) return true;
+        SafeWalk safeWalk = (SafeWalk) Category.getModule(SafeWalk.class);
+        if (safeWalk != null && safeWalk.isEnabled().isOn()) return true;
         return this.isSneaking();
 
     }

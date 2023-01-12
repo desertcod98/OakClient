@@ -10,14 +10,13 @@ import net.minecraft.screen.slot.SlotActionType;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class AutoTotem extends Module {
-//    private final IntegerSetting delay = new IntegerSetting("Delay", "delay","Time in ticks to wait before putting totem in offhand", ()->true, 0, 2000, 50); todo HOW
 
 
     public AutoTotem() {
         super("AutoTotem", "Place totems in your offhand", ()->true, true, Category.COMBAT);
     }
 
-
+    //TODO make this useful
     @Override
     public void onTick() {
         if(!mc.player.getInventory().offHand.get(0).getItem().equals(Items.TOTEM_OF_UNDYING)){

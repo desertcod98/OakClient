@@ -11,21 +11,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(World.class)
 public class WorldMixin {
     AntiWeather antiWeather;
-    @Inject(method = "getRainGradient", at=@At("RETURN"), cancellable = true)
-    void getRainGradient(float delta, CallbackInfoReturnable<Float> cir){
-        antiWeather = (AntiWeather) Category.WORLD.getModules()
-                .filter(iModule -> iModule instanceof AntiWeather)
-                .findFirst().orElse(null);
-        if(antiWeather!=null && antiWeather.isEnabled().isOn()){
+
+    @Inject(method = "getRainGradient", at = @At("RETURN"), cancellable = true)
+    void getRainGradient(float delta, CallbackInfoReturnable<Float> cir) {
+        antiWeather = (AntiWeather) Category.getModule(AntiWeather.class);
+        if (antiWeather != null && antiWeather.isEnabled().isOn()) {
             cir.setReturnValue(0f);
         }
     }
-    @Inject(method = "getThunderGradient", at=@At("RETURN"), cancellable = true)
-    void getThunderGradient(float delta, CallbackInfoReturnable<Float> cir){
-        antiWeather = (AntiWeather) Category.WORLD.getModules()
-                .filter(iModule -> iModule instanceof AntiWeather)
-                .findFirst().orElse(null);
-        if(antiWeather!=null && antiWeather.isEnabled().isOn()){
+
+    @Inject(method = "getThunderGradient", at = @At("RETURN"), cancellable = true)
+    void getThunderGradient(float delta, CallbackInfoReturnable<Float> cir) {
+        antiWeather = (AntiWeather) Category.getModule(AntiWeather.class);
+        if (antiWeather != null && antiWeather.isEnabled().isOn()) {
             cir.setReturnValue(0f);
         }
     }

@@ -13,14 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBlock.class)
 public class AbstractBlockMixin {
-    XRay xRay;
-    @Inject(method = "getAmbientOcclusionLightLevel", at=@At("HEAD"), cancellable = true)
-    void getAmbientOcclusionLevel(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir){
-        if(xRay==null){
-            xRay = (XRay) Category.WORLD.getModules()
-                    .filter(iModule -> iModule instanceof XRay)
-                    .findFirst()
-                    .orElse(null);
-        }else if(xRay.isEnabled().isOn()) cir.setReturnValue(1f);
+    @Inject(method = "getAmbientOcclusionLightLevel", at = @At("HEAD"), cancellable = true)
+    void getAmbientOcclusionLevel(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
+        XRay xRay = (XRay) Category.getModule(XRay.class);
+        if (xRay != null && xRay.isEnabled().isOn()) {
+            cir.setReturnValue(1f);
+        }
     }
 }

@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CobwebBlockMixin {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        AntiWeb antiWeb = (AntiWeb) Category.PLAYER.getModules().filter(iModule -> iModule instanceof AntiWeb).findFirst().orElse(null);
-        if(entity.isPlayer() && antiWeb!=null && antiWeb.isEnabled().isOn()){
+        AntiWeb antiWeb = (AntiWeb) Category.getModule(AntiWeb.class);
+        if (entity.isPlayer() && antiWeb != null && antiWeb.isEnabled().isOn()) {
             ci.cancel();
         }
     }

@@ -16,17 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CactusBlock.class)
 public class CactusBlockMixin {
-    private AntiCactus antiCactus;
 
     @Inject(method = "getCollisionShape", at = {@At("HEAD")}, cancellable = true)
-    private void onGetCollisionShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, ShapeContext entityContext_1, CallbackInfoReturnable<VoxelShape> infoR)
-    {
-        if(antiCactus==null){
-            antiCactus = (AntiCactus) Category.WORLD.getModules().filter(iModule -> iModule instanceof AntiCactus).findFirst().orElse(null);
-        }
-        if (antiCactus!=null && antiCactus.isEnabled().isOn()) {
+    private void onGetCollisionShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, ShapeContext entityContext_1, CallbackInfoReturnable<VoxelShape> infoR) {
+        AntiCactus antiCactus = (AntiCactus) Category.getModule(AntiCactus.class);
+        if (antiCactus != null && antiCactus.isEnabled().isOn()) {
             infoR.setReturnValue(VoxelShapes.fullCube());
-
         }
     }
 }
