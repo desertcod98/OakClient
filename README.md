@@ -1,7 +1,7 @@
 # OakClient
 OakClient is an in development utility mod created with anarchy servers in mind, providing useful features that don't come with the vanilla client.
 
-This client was created to learn and to have fun, every contribution or suggestion is welcome!
+This client was created by a clown to learn and to have fun, every contribution or suggestion is welcome!
 
 ## How to install: 
 -Put OakClient.jar (find it here: https://github.com/desertcod98/OakClient/releases) in you Fabric mods folder
