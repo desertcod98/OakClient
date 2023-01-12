@@ -17,6 +17,7 @@ public class CommandRegistry {
         commands.add(new ReloadSoundsCommand());
         commands.add(new ReloadCommand());
         commands.add(new XrayCommand());
+        commands.add(new SocialCommand());
     }
 
     public static List<Command> getCommands(){
