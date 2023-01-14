@@ -8,6 +8,8 @@ import net.minecraft.entity.projectile.ShulkerBulletEntity;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -19,6 +21,16 @@ public class EntityUtils {
                 && e.isAlive()
                 && e != mc.player
                 && !e.isConnectedThroughVehicle(mc.player);
+    }
+
+    public static List<Entity> getEntities(Predicate<Entity> filterPredicate, Comparator<Entity> sortComparator){
+        Stream<Entity> players = StreamSupport.stream(mc.world.getEntities().spliterator(), false);
+        return players.filter(filterPredicate).sorted(sortComparator).collect(Collectors.toList());
+    }
+
+    public static <T> List<T> getMappedEntities(Predicate<Entity> filterPredicate, Comparator<Entity> sortComparator, Function<Entity, T> mappingFunction){
+        Stream<Entity> entities = StreamSupport.stream(mc.world.getEntities().spliterator(), false);
+        return entities.filter(filterPredicate).sorted(sortComparator).map(mappingFunction).collect(Collectors.toList());
     }
 
     public static List<PlayerEntity> getPlayers(double range, SortMethod sortMethod){

@@ -5,6 +5,8 @@ import me.leeeaf.oakclient.gui.setting.DoubleSetting;
 import me.leeeaf.oakclient.gui.setting.EnumSetting;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
+import me.leeeaf.oakclient.systems.social.Relationship;
+import me.leeeaf.oakclient.systems.social.SocialManager;
 import me.leeeaf.oakclient.utils.EntityUtils;
 import me.leeeaf.oakclient.utils.player.RotationUtils;
 import net.minecraft.entity.Entity;
@@ -17,6 +19,7 @@ import net.minecraft.util.Hand;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -38,6 +41,7 @@ public class Killaura extends Module {
 
     public Killaura() {
         super("Killaura", "Attacks entities around the player", ()->true, true, Category.COMBAT);
+        //TODO prioritize enemies
         settings.add(range);
         settings.add(delay1_9);
         settings.add(attackThroughBlocks);
@@ -78,23 +82,25 @@ public class Killaura extends Module {
     }
 
     private boolean shouldAttackEntity(Entity entity) {
-        if(entity instanceof PlayerEntity && !entity.equals(mc.player) && attackPlayers.isOn()) return true;
+        if(entity instanceof PlayerEntity && !entity.equals(mc.player) && attackPlayers.isOn() && SocialManager.getRelationship(entity.getEntityName())!= Relationship.FRIEND) return true; //ignore friends
         if(entity instanceof Monster && attackHostileEntities.isOn()) return true;
         if(entity instanceof PassiveEntity && attackPacificEntities.isOn()) return true;
         return false;
     }
 
     private List<Entity> getEntities() {
-        Stream<Entity> targets = StreamSupport.stream(mc.world.getEntities().spliterator(), false);
         Comparator<Entity> comparator = null;
+
         switch(sortMethod.getValue()){
             case HEALTH -> comparator = Comparator.comparing((entity)-> ((LivingEntity) entity).getHealth());
             case DISTANCE -> comparator = Comparator.comparing(mc.player::distanceTo);
         }
-        return targets
-                .filter(entity -> EntityUtils.isAttackable(entity) && (attackThroughBlocks.isOn() || mc.player.canSee(entity)) && mc.player.distanceTo(entity) <= range.getValue())
-                .sorted(comparator)
-                .collect(Collectors.toList());
+
+        Predicate<Entity> filterPredicate = entity -> EntityUtils.isAttackable(entity)
+                && (attackThroughBlocks.isOn() || mc.player.canSee(entity))
+                && mc.player.distanceTo(entity) <= range.getValue()
+                && SocialManager.getRelationship(entity.getEntityName()) != Relationship.FRIEND; //ignores friends
+        return EntityUtils.getEntities(filterPredicate, comparator);
     }
 
     public enum SortMethod{

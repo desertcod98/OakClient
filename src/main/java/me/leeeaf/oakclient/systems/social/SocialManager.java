@@ -12,11 +12,25 @@ public class SocialManager {
 
     public static void addRelationship(String playerName, Relationship relationship) throws PlayerNotFoundException{
         for(PlayerEntity playerEntity: mc.world.getPlayers()){
-            if(playerEntity.getEntityName().equalsIgnoreCase(playerName) && !playerEntity.equals(mc.player)){
+            if(playerEntity.getEntityName().equalsIgnoreCase(playerName) && !playerEntity.getEntityName().equalsIgnoreCase(mc.player.getEntityName())){
                 relationshipMap.put(playerName, relationship);
                 return;
             }
         }
         throw new PlayerNotFoundException(playerName);
+    }
+
+    public static void removeRelationship(String playerName) throws PlayerNotFoundException{
+        for(PlayerEntity playerEntity: mc.world.getPlayers()){
+            if(playerEntity.getEntityName().equalsIgnoreCase(playerName)){
+                relationshipMap.remove(playerName);
+                return;
+            }
+        }
+        throw new PlayerNotFoundException(playerName);
+    }
+
+    public static Relationship getRelationship(String playerName){
+        return relationshipMap.get(playerName);
     }
 }

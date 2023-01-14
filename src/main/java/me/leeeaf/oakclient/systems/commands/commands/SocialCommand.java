@@ -4,11 +4,12 @@ import me.leeeaf.oakclient.systems.commands.Command;
 import me.leeeaf.oakclient.systems.social.PlayerNotFoundException;
 import me.leeeaf.oakclient.systems.social.Relationship;
 import me.leeeaf.oakclient.systems.social.SocialManager;
+import me.leeeaf.oakclient.utils.io.ChatLogger;
 import net.minecraft.text.Text;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class SocialCommand extends Command {
+    //TODO add a command to show relationships
     public SocialCommand() {
         super("social", "manage friends and enemies", new String[]{"social", "relationship", "relationships", "friend", "friends", "enemy", "enemies"}, null);
     }
@@ -27,6 +28,11 @@ public class SocialCommand extends Command {
                     relationship = Relationship.ENEMY;
                     break;
                 case "remove":
+                    try{
+                        SocialManager.removeRelationship(args[1]);
+                    } catch (PlayerNotFoundException e) {
+                        ChatLogger.error(Text.of(e.getMessage()));
+                    }
                     break;
                 default:
                     showUsageMessage();
@@ -34,14 +40,15 @@ public class SocialCommand extends Command {
             }
             try {
                 SocialManager.addRelationship(args[1], relationship);
-                mc.player.sendMessage(Text.of("Added "+args[1])); //TODO does this work?
+                Text formattedRelationshipText = Text.literal(relationship.toString()).formatted(relationship.getColor());
+                ChatLogger.log((Text.literal(args[1] + " is now your ").append(formattedRelationshipText)));
             } catch (PlayerNotFoundException e) {
-                mc.player.sendMessage(Text.of(e.getMessage()));
+                ChatLogger.error(Text.of(e.getMessage()));
             }
         }
     }
 
     private void showUsageMessage() {
-        mc.player.sendMessage(Text.of("Usage: .social [friend/enemy/remove] 'playerName'"));
+        ChatLogger.error(Text.of(".social usage: .social [friend/enemy/remove] 'playerName'"));
     }
 }
