@@ -8,7 +8,7 @@ import java.util.Map;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class SocialManager {
-    private static Map<String, Relationship> relationshipMap = new HashMap<>();
+    private static final Map<String, Relationship> relationshipMap = new HashMap<>();
 
     public static void addRelationship(String playerName, Relationship relationship) throws PlayerNotFoundException{
         for(PlayerEntity playerEntity: mc.world.getPlayers()){

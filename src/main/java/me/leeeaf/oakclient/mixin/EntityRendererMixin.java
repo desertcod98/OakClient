@@ -3,6 +3,9 @@ package me.leeeaf.oakclient.mixin;
 import me.leeeaf.oakclient.event.EventBus;
 import me.leeeaf.oakclient.event.events.render.RenderEntityLabelEvent;
 import me.leeeaf.oakclient.event.events.render.RenderLabelIfPresentEvent;
+import me.leeeaf.oakclient.systems.social.Relationship;
+import me.leeeaf.oakclient.systems.social.SocialManager;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -23,9 +26,8 @@ public abstract class EntityRendererMixin <T extends Entity>{
     @Final
     @Shadow protected EntityRenderDispatcher dispatcher;
 
-    @Inject(method = "renderLabelIfPresent", at=@At("TAIL"))
+    @Inject(method = "renderLabelIfPresent", at=@At("HEAD"))
     private void onRenderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
-        text = Text.of("asd");//TODO does not work
         if(entity.isAlive()){
             EventBus.getEventBus().post(new RenderLabelIfPresentEvent(text, (LivingEntity) entity));
         }
