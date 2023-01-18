@@ -88,8 +88,6 @@ public class Killaura extends Module {
         return false;
     }
 
-    //TODO replace distanceTo call with squaredDistanceTo
-
     private List<Entity> getEntities() {
         Comparator<Entity> comparator = null;
 
@@ -100,7 +98,7 @@ public class Killaura extends Module {
 
         Predicate<Entity> filterPredicate = entity -> EntityUtils.isAttackable(entity)
                 && (attackThroughBlocks.isOn() || mc.player.canSee(entity))
-                && mc.player.distanceTo(entity) <= range.getValue()
+                && mc.player.squaredDistanceTo(entity) <= range.getValue()*range.getValue()
                 && SocialManager.getRelationship(entity.getEntityName()) != Relationship.FRIEND; //ignores friends
         return EntityUtils.getEntities(filterPredicate, comparator);
     }
