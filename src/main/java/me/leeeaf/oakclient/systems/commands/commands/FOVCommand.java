@@ -2,7 +2,10 @@ package me.leeeaf.oakclient.systems.commands.commands;
 
 import me.leeeaf.oakclient.OakClientClient;
 import me.leeeaf.oakclient.systems.commands.Command;
+import me.leeeaf.oakclient.utils.io.ChatLogger;
 import net.minecraft.text.Text;
+
+import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class FOVCommand extends Command {
     public FOVCommand() {
@@ -15,10 +18,10 @@ public class FOVCommand extends Command {
         try{
             int fov = Integer.parseInt(args[0]);
             if(fov >= 30 && fov <= 110) {
-                OakClientClient.mc.options.getFov().setValue(fov);
+                mc.options.getFov().setValue(fov);
             }
             else{
-                OakClientClient.mc.player.sendMessage(Text.of("FOV value must be between 30 and 110"));
+                ChatLogger.error(Text.of("FOV value must be between 30 and 110"));
             }
         }catch (Exception e){
             e.printStackTrace();
