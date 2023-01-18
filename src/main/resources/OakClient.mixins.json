@@ -22,6 +22,7 @@
     "InGameHudMixin",
     "KeyboardMixin",
     "LightmapTextureManagerMixin",
+    "PlayerListHudMixin",
     "WorldRendererMixin"
   ],
   "injectors": {

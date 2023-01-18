@@ -46,7 +46,7 @@ public class Killaura extends Module {
         settings.add(delay1_9);
         settings.add(attackThroughBlocks);
         settings.add(sortMethod);
-        settings.add(rotate);
+        settings.add(rotate); //TODO rotation triggers 'Improbable: is exhibiting an erratic behaviour (Check: combined.yawrate)' in NCP (probably modify every packet send to look at that entity)
         rotate.subSettings.add(rotationMode);
 
         settings.add(attackPacificEntities);
@@ -87,6 +87,8 @@ public class Killaura extends Module {
         if(entity instanceof PassiveEntity && attackPacificEntities.isOn()) return true;
         return false;
     }
+
+    //TODO replace distanceTo call with squaredDistanceTo
 
     private List<Entity> getEntities() {
         Comparator<Entity> comparator = null;

@@ -30,10 +30,12 @@ public class SocialCommand extends Command {
                 case "remove":
                     try{
                         SocialManager.removeRelationship(args[1]);
+                        ChatLogger.log(Text.of("Removed "+args[1]));
+                        return;
                     } catch (PlayerNotFoundException e) {
                         ChatLogger.error(Text.of(e.getMessage()));
+                        return;
                     }
-                    break;
                 default:
                     showUsageMessage();
                     return;

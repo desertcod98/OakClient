@@ -25,6 +25,7 @@ public abstract class EntityRendererMixin <T extends Entity>{
 
     @Inject(method = "renderLabelIfPresent", at=@At("TAIL"))
     private void onRenderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
+        text = Text.of("asd");//TODO does not work
         if(entity.isAlive()){
             EventBus.getEventBus().post(new RenderLabelIfPresentEvent(text, (LivingEntity) entity));
         }
