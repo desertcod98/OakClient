@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class Freecam extends Module {
-    private final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "FlySpeed", "The speed at which you fly", ()->true,1,100,20);
+    private final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "flySpeed", "The speed at which you fly", ()->true,1,100,20);
     private final BooleanSetting chunkCulling = new BooleanSetting("Chunk culling", "chunkCulling", "Disable chunk culling (renders every chunk)", ()->true, true);
 
     public Freecam() {

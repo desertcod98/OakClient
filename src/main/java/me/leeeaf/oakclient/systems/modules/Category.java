@@ -89,7 +89,7 @@ public enum Category implements ICategory {
 		return null;
 	}
 
-	public static boolean toggleModuleByKeybind(int key){
+	public static void toggleModuleByKeybind(int key){
 		for(Category category : Category.values()){
 			for(IModule module: category.getModules().toList()){
 				KeybindSetting keybindSetting = (KeybindSetting) module.getSettings()
@@ -99,10 +99,9 @@ public enum Category implements ICategory {
 					if(module.isEnabled() != null){
 						module.isEnabled().toggle();
 					}
-					return true;
+					return;
 				}
 			}
 		}
-		return false;
 	}
 }

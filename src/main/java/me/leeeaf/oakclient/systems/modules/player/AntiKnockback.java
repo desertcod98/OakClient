@@ -14,12 +14,12 @@ import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import static me.leeeaf.oakclient.OakClientClient.mc;
 
 public class AntiKnockback extends Module{
-    private final IntegerSetting velXZ_setting= new IntegerSetting("XZ velocity", "XZvelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);
-    private final IntegerSetting velY_setting= new IntegerSetting("Y velocity", "Yvelocity", "Vertical velocity to keep", ()->true, 0, 100, 0);
+    private final IntegerSetting velXZ_setting= new IntegerSetting("Horizontal velocity", "horizontalVelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);
+    private final IntegerSetting velY_setting= new IntegerSetting("Vertical velocity", "verticalVelocity", "Vertical velocity to keep", ()->true, 0, 100, 0);
 
     private final BooleanSetting explosions = new BooleanSetting("Explosions", "explosions", "Reduces knockback from explosions", ()->true, true);
-    private final IntegerSetting explosions_velXZ_setting= new IntegerSetting("XZ velocity", "XZvelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);
-    private final IntegerSetting explosions_velY_setting= new IntegerSetting("Y velocity", "Yvelocity", "Vertical velocity to keep", ()->true, 0, 100, 0);
+    private final IntegerSetting explosions_velXZ_setting= new IntegerSetting("XZ velocity", "explosionHorizontalVelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);
+    private final IntegerSetting explosions_velY_setting= new IntegerSetting("Y velocity", "explosionVerticalVelocity", "Vertical velocity to keep", ()->true, 0, 100, 0);
 
 
     public AntiKnockback() {

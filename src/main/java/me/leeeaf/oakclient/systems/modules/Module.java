@@ -83,6 +83,10 @@ public abstract class Module implements IModule {
 
 	public void onTick(){}
 
+	public List<Setting<?>> getSettingsInstances(){
+		return settings;
+	}
+
 	@Override
 	public Stream<ISetting<?>> getSettings() {
 		return settings.stream().filter(setting->setting instanceof ISetting).sorted(Comparator.comparing(a -> a.displayName)).map(setting->(ISetting<?>)setting);

@@ -1,6 +1,7 @@
 package me.leeeaf.oakclient.mixin;
 
 import me.leeeaf.oakclient.systems.modules.Category;
+import me.leeeaf.oakclient.systems.modules.world.AntiCactus;
 import me.leeeaf.oakclient.systems.modules.world.XRay;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,7 +20,7 @@ public class BlockMixin{
     @Inject(method = "shouldDrawSide", at = @At("RETURN"), cancellable = true)
     private static void onShouldDrawSide(BlockState state, BlockView world, BlockPos pos, Direction side, BlockPos otherPos, CallbackInfoReturnable<Boolean> cir) {
         if(xRay == null){
-            xRay = (XRay) Category.WORLD.getModules().filter(iModule -> iModule instanceof XRay).findFirst().orElse(null);
+            xRay = (XRay) Category.getModule(XRay.class);
         }else if(xRay.isEnabled().isOn()){
             cir.setReturnValue(xRay.shouldRenderSide(state.getBlock()));
         }
