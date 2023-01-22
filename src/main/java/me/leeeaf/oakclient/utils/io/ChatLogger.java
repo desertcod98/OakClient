@@ -3,7 +3,7 @@ package me.leeeaf.oakclient.utils.io;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class ChatLogger {
     private static final Text logPrefix = Text.literal("[").append(Text.literal("Oak").formatted(Formatting.DARK_GREEN)).append(Text.literal("] "));

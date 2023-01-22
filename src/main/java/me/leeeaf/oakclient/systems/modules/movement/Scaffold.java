@@ -10,7 +10,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Scaffold extends Module {
     private final BooleanSetting airPlace = new BooleanSetting("AirPlace", "airPlace", "Allows placing blocks in air", ()->true, false);

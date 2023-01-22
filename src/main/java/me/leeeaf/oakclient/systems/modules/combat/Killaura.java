@@ -20,11 +20,8 @@ import net.minecraft.util.Hand;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Killaura extends Module {
     private final DoubleSetting range = new DoubleSetting("Range", "range", "Maximum range of attacksTEST", ()->true, 0, 6, 4.25);

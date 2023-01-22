@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class FileHelper {
     private final Path workingDir;
@@ -25,7 +25,7 @@ public class FileHelper {
         return instance;
     }
 
-    public String readFromFile(String fileName){
+    public String readFromFile(String fileName){ //TODO throw exception here and in writeToFile
         Path filePath = workingDir.resolve(fileName);
         try {
             return Files.readString(filePath);

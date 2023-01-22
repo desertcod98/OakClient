@@ -18,7 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 import java.awt.*;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class ESP extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);

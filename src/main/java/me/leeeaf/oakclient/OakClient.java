@@ -13,14 +13,14 @@ import me.leeeaf.oakclient.systems.SaveHelper;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.utils.file.FileHelper;
 import me.leeeaf.oakclient.utils.io.KeyAction;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
-import org.lwjgl.glfw.GLFW;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
-
-public class OakClient implements ModInitializer {
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
+public class OakClient implements ModInitializer, ClientModInitializer {
     public static String splashText = "OakClient";
+    public static MinecraftClient mc;
 
     private static ClickGUI gui;
     private boolean inited=false;
@@ -59,5 +59,11 @@ public class OakClient implements ModInitializer {
         if(!inited && gui!=null){
             gui.render();
         }
+    }
+
+    @Override
+    public void onInitializeClient() {
+        mc = MinecraftClient.getInstance();
+        SaveHelper.getInstance().loadAllSystems();
     }
 }

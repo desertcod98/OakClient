@@ -1,5 +1,6 @@
 package me.leeeaf.oakclient.systems;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
@@ -7,6 +8,8 @@ import me.leeeaf.oakclient.gui.setting.*;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.file.FileHelper;
+
+import java.awt.*;
 
 public class SaveHelper {
     private static SaveHelper instance;
@@ -25,18 +28,18 @@ public class SaveHelper {
         saveModules();
     }
 
-    private void loadAllSystems(){
+    public void loadAllSystems() {
         loadModules();
     }
 
-    private void saveModules() {
+    private void saveModules() { //TODO manage subsettings
         JsonObject json = new JsonObject();
         for (Category category : Category.values()) {
             category.getModules().forEach(iModule -> {
                 JsonObject moduleJson = new JsonObject();
                 JsonObject moduleSettingsJson = new JsonObject();
                 ((Module) iModule).getSettingsInstances().forEach(setting -> {
-                    try{
+                    try {
                         if (setting instanceof BooleanSetting) {
                             moduleSettingsJson.add(setting.getConfigName(), new JsonPrimitive(((BooleanSetting) setting).getValue()));
                         } else if (setting instanceof IntegerSetting) {
@@ -52,22 +55,58 @@ public class SaveHelper {
                         } else if (setting instanceof StringSetting) {
                             moduleSettingsJson.add(setting.getConfigName(), new JsonPrimitive(((StringSetting) setting).getValue()));
                         }
-                    }catch (NullPointerException ignored){}
+                    } catch (NullPointerException ignored) {
+                    }
                 });
-                if(moduleSettingsJson.size()!=0){ //don't create "settings" key if module has no settings set
+                if (moduleSettingsJson.size() != 0) { //don't create "settings" key if module has no settings set
                     moduleJson.add("settings", moduleSettingsJson);
                 }
-                if(moduleJson.size()!=0){  //don't save module if module has no proprieties set
-                    json.add(iModule.getDisplayName(), moduleJson);
-                }
+                moduleJson.add("enabled", new JsonPrimitive(iModule.isEnabled() != null && iModule.isEnabled().isOn()));
+                json.add(iModule.getDisplayName(), moduleJson);
             });
         }
         FileHelper.getInstance().writeToFile(json.toString(), "modules.json");
     }
 
-    private void loadModules(){
+    private void loadModules() {
         String modulesJsonString = FileHelper.getInstance().readFromFile("modules.json");
         JsonObject modulesJson = JsonParser.parseString(modulesJsonString).getAsJsonObject();
-        //TODO complete loading of modules
+
+        for (String key : modulesJson.keySet()) {
+            Module module = Category.getModule(key);
+            if (module == null) {
+                continue;
+            }
+
+            JsonObject value = modulesJson.getAsJsonObject(key);
+
+            if (value.get("enabled").getAsBoolean() && module.isEnabled() != null) {
+                module.isEnabled().toggle();
+            }
+
+            if(value.has("settings")){
+                JsonObject settings = value.getAsJsonObject("settings");
+                for(String settingKey : settings.keySet()){
+                    Setting<?> setting = module.getSetting(settingKey);
+                    if(setting!=null){
+                        if (setting instanceof BooleanSetting) {
+                            ((BooleanSetting)setting).setValue(settings.get(settingKey).getAsBoolean());
+                        } else if (setting instanceof IntegerSetting) {
+                            ((IntegerSetting)setting).setValue(settings.get(settingKey).getAsInt());
+                        } else if (setting instanceof DoubleSetting) {
+                            ((DoubleSetting)setting).setValue(settings.get(settingKey).getAsDouble());
+                        } else if (setting instanceof ColorSetting) {
+                            ((ColorSetting)setting).setValue(new Color(settings.get(settingKey).getAsInt()));
+                        } else if (setting instanceof EnumSetting<?>) {
+                            ((EnumSetting<?>)setting).setValueIndex(settings.get(settingKey).getAsInt());
+                        } else if (setting instanceof KeybindSetting) {
+                            ((KeybindSetting)setting).setValue(settings.get(settingKey).getAsInt());
+                        } else if (setting instanceof StringSetting) {
+                            ((StringSetting)setting).setValue(settings.get(settingKey).getAsString());
+                        }
+                    }
+                }
+            }
+        }
     }
 }

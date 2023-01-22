@@ -1,11 +1,10 @@
 package me.leeeaf.oakclient.systems.commands.commands;
 
-import me.leeeaf.oakclient.OakClientClient;
 import me.leeeaf.oakclient.systems.commands.Command;
 import me.leeeaf.oakclient.utils.io.ChatLogger;
 import net.minecraft.text.Text;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class FOVCommand extends Command {
     public FOVCommand() {

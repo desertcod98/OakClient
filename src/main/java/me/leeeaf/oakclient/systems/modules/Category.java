@@ -89,6 +89,14 @@ public enum Category implements ICategory {
 		return null;
 	}
 
+	public static Module getModule(String moduleDisplayName){
+		for(Category category : Category.values()){
+			Module module = (Module) category.getModules().filter(iModule -> iModule.getDisplayName().equals(moduleDisplayName)).findFirst().orElse(null);
+			if(module!=null) return module;
+		}
+		return null;
+	}
+
 	public static void toggleModuleByKeybind(int key){
 		for(Category category : Category.values()){
 			for(IModule module: category.getModules().toList()){

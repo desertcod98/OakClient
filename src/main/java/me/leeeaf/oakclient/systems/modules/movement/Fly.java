@@ -6,7 +6,7 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.util.math.Vec3d;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Fly extends Module {
     private int tickCounter;

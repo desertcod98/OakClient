@@ -91,4 +91,8 @@ public abstract class Module implements IModule {
 	public Stream<ISetting<?>> getSettings() {
 		return settings.stream().filter(setting->setting instanceof ISetting).sorted(Comparator.comparing(a -> a.displayName)).map(setting->(ISetting<?>)setting);
 	}
+
+	public Setting<?> getSetting(String settingConfigName){
+		return settings.stream().filter(setting -> setting.getConfigName().equals(settingConfigName)).findFirst().orElse(null);
+	}
 }

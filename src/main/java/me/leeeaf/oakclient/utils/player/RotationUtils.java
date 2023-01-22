@@ -3,7 +3,7 @@ package me.leeeaf.oakclient.utils.player;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.MathHelper;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class RotationUtils {
     public static double getYaw(double x, double z) {

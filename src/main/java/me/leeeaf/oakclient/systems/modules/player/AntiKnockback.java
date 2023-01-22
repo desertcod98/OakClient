@@ -11,7 +11,7 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class AntiKnockback extends Module{
     private final IntegerSetting velXZ_setting= new IntegerSetting("Horizontal velocity", "horizontalVelocity", "Horizontal velocity to keep", ()->true, 0, 100, 0);

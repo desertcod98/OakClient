@@ -14,7 +14,7 @@ import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Freecam extends Module {
     private final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "flySpeed", "The speed at which you fly", ()->true,1,100,20);

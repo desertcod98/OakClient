@@ -19,7 +19,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Tracers extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);

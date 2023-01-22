@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.Arrays;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 import static me.leeeaf.oakclient.systems.modules.render.Search.searchTargets;
 
 public class SearchCommand extends Command {

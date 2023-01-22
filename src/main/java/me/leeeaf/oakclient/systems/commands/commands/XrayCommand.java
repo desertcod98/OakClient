@@ -10,10 +10,9 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 import static me.leeeaf.oakclient.systems.modules.world.XRay.blocksToRender;
 
 public class XrayCommand extends Command {

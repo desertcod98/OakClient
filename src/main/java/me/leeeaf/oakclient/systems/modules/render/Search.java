@@ -20,7 +20,7 @@ import net.minecraft.util.math.Vec3d;
 import java.util.HashSet;
 import java.util.Set;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Search extends Module {
     private final DoubleSetting widthSetting = new DoubleSetting("Width", "width", "Width of tracers", ()->true, 0.1,5,1.5);

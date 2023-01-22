@@ -11,7 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class AutoWeb extends Module {
     private final BooleanSetting swapBack = new BooleanSetting("Swap back", "swapBack", "Swap back to previous item", () -> true, true);
