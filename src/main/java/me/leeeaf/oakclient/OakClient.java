@@ -64,6 +64,6 @@ public class OakClient implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitializeClient() {
         mc = MinecraftClient.getInstance();
-        SaveHelper.getInstance().loadAllSystems();
+        SaveHelper.getInstance().loadAllSystems(); //TODO if files does not exist everything explodes
     }
 }

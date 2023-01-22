@@ -17,4 +17,12 @@ public class ChatLogger {
     public static void error(Text message){
         mc.player.sendMessage(errorPrefix.copy().append(message.copy().formatted(Formatting.RED)));
     }
+
+    public static void error(String message){
+        mc.player.sendMessage(errorPrefix.copy().append(Text.literal(message).formatted(Formatting.RED)));
+    }
+
+    public static void log(String message){
+        mc.player.sendMessage(logPrefix.copy().append(Text.literal(message)));
+    }
 }

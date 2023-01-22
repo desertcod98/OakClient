@@ -11,41 +11,29 @@ public class FileHelper {
     private final Path workingDir;
     private static FileHelper instance;
 
-    private FileHelper(){
+    private FileHelper() {
         workingDir = Paths.get(mc.runDirectory.getPath(), "OakClient/");
         if (!workingDir.toFile().exists()) {
             workingDir.toFile().mkdirs();
         }
     }
 
-    public static FileHelper getInstance(){
-        if(instance == null){
+    public static FileHelper getInstance() {
+        if (instance == null) {
             instance = new FileHelper();
         }
         return instance;
     }
 
-    public String readFromFile(String fileName){ //TODO throw exception here and in writeToFile
+    public String readFromFile(String fileName) throws IOException {
         Path filePath = workingDir.resolve(fileName);
-        try {
-            return Files.readString(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return Files.readString(filePath);
     }
 
-    public void writeToFile(String data, String fileName){
+    public void writeToFile(String data, String fileName) throws IOException {
         Path filePath = workingDir.resolve(fileName);
-        try {
-            filePath.toFile().createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        filePath.toFile().createNewFile();
+        Files.write(filePath, data.getBytes());
 
-        try {
-            Files.write(filePath, data.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

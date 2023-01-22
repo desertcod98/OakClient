@@ -8,8 +8,10 @@ import me.leeeaf.oakclient.gui.setting.*;
 import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import me.leeeaf.oakclient.utils.file.FileHelper;
+import me.leeeaf.oakclient.utils.io.ChatLogger;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class SaveHelper {
     private static SaveHelper instance;
@@ -65,11 +67,21 @@ public class SaveHelper {
                 json.add(iModule.getDisplayName(), moduleJson);
             });
         }
-        FileHelper.getInstance().writeToFile(json.toString(), "modules.json");
+        try {
+            FileHelper.getInstance().writeToFile(json.toString(), "modules.json");
+        } catch (IOException e) {
+            ChatLogger.error("Couldn't save modules to file modules.json!");
+        }
     }
 
     private void loadModules() {
-        String modulesJsonString = FileHelper.getInstance().readFromFile("modules.json");
+        String modulesJsonString = null;
+        try {
+            modulesJsonString = FileHelper.getInstance().readFromFile("modules.json");
+        } catch (IOException e) {
+            ChatLogger.error("Couldn't loAd modules from file modules.json!");
+            return;
+        }
         JsonObject modulesJson = JsonParser.parseString(modulesJsonString).getAsJsonObject();
 
         for (String key : modulesJson.keySet()) {
