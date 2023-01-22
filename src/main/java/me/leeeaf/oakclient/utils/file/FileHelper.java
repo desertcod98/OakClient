@@ -34,6 +34,5 @@ public class FileHelper {
         Path filePath = workingDir.resolve(fileName);
         filePath.toFile().createNewFile();
         Files.write(filePath, data.getBytes());
-
     }
 }
