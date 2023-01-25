@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientConnection.class)
-public class ClientConnectionMixin {
+public class ClientConnectionMixin { //TODO make all mixins abstract
     @Shadow
     private Channel channel;
 
@@ -23,7 +23,7 @@ public class ClientConnectionMixin {
     }
 
     @Inject(at=@At("HEAD"), method = "channelRead0(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/Packet;)V", cancellable = true)
-    private void onRecievePacketHead(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo ci){
+    private void onReceivePacketHead(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo ci){
         if (channel.isOpen() && packet != null) {
             if(EventBus.getEventBus().post(new PacketEvent.Receive(packet)).isCancelled()) ci.cancel();
         }
