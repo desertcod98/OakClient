@@ -1,8 +1,9 @@
 package me.leeeaf.oakclient.event.events.io;
 
+import me.leeeaf.oakclient.event.Event;
 import me.leeeaf.oakclient.utils.io.KeyAction;
 
-public class KeyEvent {
+public class KeyEvent extends Event {
     public int key;
     public int modifiers;
     public KeyAction keyAction;
