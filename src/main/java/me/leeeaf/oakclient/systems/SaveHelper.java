@@ -1,5 +1,6 @@
 package me.leeeaf.oakclient.systems;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
@@ -34,7 +35,7 @@ public class SaveHelper {
         loadModules();
     }
 
-    private void saveModules() { //TODO manage subsettings
+    private void saveModules() {
         JsonObject json = new JsonObject();
         for (Category category : Category.values()) {
 
@@ -45,7 +46,7 @@ public class SaveHelper {
                 for (Setting<?> setting : ((Module) module).getSettingsInstances()) {
 
                     JsonObject tempModuleSettingsJson = getSettingJson(setting);
-                    moduleSettingsJson = JsonUtils.mergeJsonObjects(moduleSettingsJson, tempModuleSettingsJson);
+                    JsonUtils.mergeJsonObject(moduleSettingsJson, tempModuleSettingsJson);
                 }
                 if (moduleSettingsJson.size() > 0) { //don't create "settings" key if module has no settings set
                     moduleJson.add("settings", moduleSettingsJson);
@@ -57,7 +58,7 @@ public class SaveHelper {
         try {
             FileHelper.getInstance().writeToFile(json.toString(), "modules.json");
         } catch (IOException e) {
-            ChatLogger.error("Couldn't save modules to file modules.json!");
+            ChatLogger.error("Couldn't write to file modules.json!");
         }
     }
 
@@ -67,7 +68,7 @@ public class SaveHelper {
         if (setting.getSubSettingsInstances().size() != 0) {
             JsonObject subSettingJson = new JsonObject();
             for (Setting<?> subSetting : setting.getSubSettingsInstances()) {
-                subSettingJson = JsonUtils.mergeJsonObjects(subSettingJson, getSettingJson(subSetting)); //TODO subSettings appear all together, they should be under their parent setting
+                JsonUtils.mergeJsonObject(subSettingJson, getSettingJson(subSetting));
             }
             settingJson.add("subSettings", subSettingJson);
         }
@@ -93,12 +94,12 @@ public class SaveHelper {
         return settingJson;
     }
 
-    private void loadModules() { //TODO can't load subSettings if previous TODO isn't done(? lmao)
+    private void loadModules() {
         String modulesJsonString = null;
         try {
             modulesJsonString = FileHelper.getInstance().readFromFile("modules.json");
         } catch (IOException e) {
-            ChatLogger.error("Couldn't load modules from file modules.json!");
+            ChatLogger.error("Couldn't read file modules.json!");
             return;
         }
         JsonObject modulesJson = JsonParser.parseString(modulesJsonString).getAsJsonObject();
@@ -117,27 +118,49 @@ public class SaveHelper {
 
             if (value.has("settings")) {
                 JsonObject settings = value.getAsJsonObject("settings");
+
+                JsonObject subSettings = null;
+
+                if (settings.has("subSettings")) {
+                    subSettings = settings.getAsJsonObject("subSettings");
+                }
+
                 for (String settingKey : settings.keySet()) {
                     Setting<?> setting = module.getSetting(settingKey);
                     if (setting != null) {
-                        if (setting instanceof BooleanSetting) {
-                            ((BooleanSetting) setting).setValue(settings.get(settingKey).getAsBoolean());
-                        } else if (setting instanceof IntegerSetting) {
-                            ((IntegerSetting) setting).setValue(settings.get(settingKey).getAsInt());
-                        } else if (setting instanceof DoubleSetting) {
-                            ((DoubleSetting) setting).setValue(settings.get(settingKey).getAsDouble());
-                        } else if (setting instanceof ColorSetting) {
-                            ((ColorSetting) setting).setValue(new Color(settings.get(settingKey).getAsInt()));
-                        } else if (setting instanceof EnumSetting<?>) {
-                            ((EnumSetting<?>) setting).setValueIndex(settings.get(settingKey).getAsInt());
-                        } else if (setting instanceof KeybindSetting) {
-                            ((KeybindSetting) setting).setValue(settings.get(settingKey).getAsInt());
-                        } else if (setting instanceof StringSetting) {
-                            ((StringSetting) setting).setValue(settings.get(settingKey).getAsString());
+                        setSettingValue(setting, settings.get(settingKey));
+                        if (subSettings != null) {
+                            for (String subSettingKey : subSettings.keySet()) {
+                                Setting<?> subSetting = setting.getSubSettingsInstances().stream()
+                                        .filter(subSettingInstance -> subSettingInstance.getConfigName().equals(subSettingKey))
+                                        .findFirst()
+                                        .orElse(null);
+                                if (subSetting != null) {
+                                    setSettingValue(subSetting, subSettings.get(subSettingKey));
+                                }
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void setSettingValue(Setting<?> setting, JsonElement value) {
+        if (setting instanceof BooleanSetting) {
+            ((BooleanSetting) setting).setValue(value.getAsBoolean());
+        } else if (setting instanceof IntegerSetting) {
+            ((IntegerSetting) setting).setValue(value.getAsInt());
+        } else if (setting instanceof DoubleSetting) {
+            ((DoubleSetting) setting).setValue(value.getAsDouble());
+        } else if (setting instanceof ColorSetting) {
+            ((ColorSetting) setting).setValue(new Color(value.getAsInt()));
+        } else if (setting instanceof EnumSetting<?>) {
+            ((EnumSetting<?>) setting).setValueIndex(value.getAsInt());
+        } else if (setting instanceof KeybindSetting) {
+            ((KeybindSetting) setting).setValue(value.getAsInt());
+        } else if (setting instanceof StringSetting) {
+            ((StringSetting) setting).setValue(value.getAsString());
         }
     }
 }

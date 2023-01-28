@@ -1,22 +1,27 @@
 package me.leeeaf.oakclient.utils.io;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.Map;
+
 public class JsonUtils {
-    private static final Gson gson = new Gson();
 
-    public static JsonObject mergeJsonObjects(JsonObject o1, JsonObject o2){
-        if(o1.size()<=0){
-            return o2;
-        }else if(o2.size()<=0){
-            return o1;
+    public static void mergeJsonObject(JsonObject obj1, JsonObject obj2){
+        for (Map.Entry<String, JsonElement> entry : obj2.entrySet()) {
+            String key = entry.getKey();
+            JsonElement value = entry.getValue();
+            if (obj1.has(key)) {
+                JsonElement existingValue = obj1.get(key);
+                if (existingValue.isJsonObject() && value.isJsonObject()) {
+                    mergeJsonObject(existingValue.getAsJsonObject(), value.getAsJsonObject());
+                } else {
+                    obj1.add(key, value);
+                }
+            } else {
+                obj1.add(key, value);
+            }
         }
-
-        String o1str = o1.toString();
-        String o2str = o2.toString();
-
-        String result = o1str.substring(0, o1str.length()-1) + "," + o2str.substring(1);
-        return gson.fromJson(result, JsonObject.class);
     }
 }
