@@ -23,7 +23,7 @@ public class AntiKnockback extends Module{
 
 
     public AntiKnockback() {
-        super("AntiKnockback", "Reduces entity damage knockback", ()->true, true, Category.PLAYER);
+        super("AntiKnockback", "Reduces knockback from various sources", ()->true, true, Category.PLAYER);
         settings.add(velXZ_setting);
         settings.add(velY_setting);
         settings.add(explosions);

@@ -23,7 +23,7 @@ public class EventBus {
     }
 
 
-    public <T> T post(T event) {
+    public <T extends Event> T post(T event){
         List<EventSubscriber> subscribers = subscribersMap.get(event.getClass());
         if (subscribers != null) {
             for (EventSubscriber subscriber : subscribers) {

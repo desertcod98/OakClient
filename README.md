@@ -16,6 +16,14 @@ This client was created to learn and to have fun, every contribution or suggesti
 -Command prefix is '.' (use '.help' to get help about commands)
 
 
+## How to build from source:
+
+Windows: `.gradlew.bat build`
+
+Other: `.gradlew build`
+
+
+
 ## Dependencies: 
 
 -Panel Studio by lukflug (https://github.com/lukflug/PanelStudio)
