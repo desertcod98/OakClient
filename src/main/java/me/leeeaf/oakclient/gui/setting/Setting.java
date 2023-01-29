@@ -30,6 +30,10 @@ public abstract class Setting<T> implements ILabeled {
 		this.value=value;
 	}
 
+	public String getConfigName(){
+		return configName;
+	}
+
 	@Override
 	public String getDisplayName() {
 		return displayName;
@@ -44,7 +48,11 @@ public abstract class Setting<T> implements ILabeled {
 	public IBoolean isVisible() {
 		return visible;
 	}
-	
+
+	public List<Setting<?>> getSubSettingsInstances(){
+		return subSettings;
+	}
+
 	public Stream<ISetting<?>> getSubSettings() {
 		if (subSettings.size()==0) return null;
 		return subSettings.stream().filter(setting->setting instanceof ISetting).sorted((a,b)->a.displayName.compareTo(b.displayName)).map(setting->(ISetting<?>)setting);

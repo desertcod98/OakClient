@@ -13,7 +13,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.leeeaf.oakclient.OakClientClient"
+      "me.leeeaf.oakclient.OakClient"
     ],
     "main": [
       "me.leeeaf.oakclient.OakClient"

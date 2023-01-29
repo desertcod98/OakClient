@@ -8,10 +8,10 @@ import net.minecraft.block.Blocks;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class XRay extends Module {
-    public static ArrayList<Block> blocksToRender = new ArrayList<>(Arrays.asList(
+    public static ArrayList<Block> blocksToRender = new ArrayList<>(Arrays.asList( //TODO save in files
             Blocks.DIAMOND_ORE,
             Blocks.COAL_ORE,
             Blocks.LAPIS_ORE

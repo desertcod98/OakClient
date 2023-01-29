@@ -5,7 +5,7 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Fullbright extends Module {
     public Fullbright() {

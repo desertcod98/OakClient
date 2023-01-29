@@ -9,18 +9,9 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 public class NoFall extends Module{
+
     public NoFall() {
         super("NoFall", "Prevents you from taking fall damage", ()->true, true, Category.PLAYER);
-    }
-
-    @Override
-    public void onDisable() {
-        EventBus.getEventBus().unsubscribe(this);
-    }
-
-    @Override
-    public void onEnable() {
-        EventBus.getEventBus().subscribe(this);
     }
 
     @EventSubscribe

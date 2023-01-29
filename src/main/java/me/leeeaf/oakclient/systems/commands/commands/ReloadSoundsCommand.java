@@ -2,7 +2,7 @@ package me.leeeaf.oakclient.systems.commands.commands;
 
 import me.leeeaf.oakclient.systems.commands.Command;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class ReloadSoundsCommand extends Command {
     public ReloadSoundsCommand() {

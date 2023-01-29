@@ -6,7 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.UUID;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class FakePlayer extends OtherClientPlayerEntity {
     //TODO copy player proprieties (skin ecc)

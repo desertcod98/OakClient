@@ -6,11 +6,11 @@ import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.util.math.Vec3d;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Fly extends Module {
     private int tickCounter;
-    public final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "FlySpeed", "The speed at which you fly", ()->true,1,100,20);
+    public final IntegerSetting flySpeed = new IntegerSetting("Fly speed", "flySpeed", "The speed at which you fly", ()->true,1,100,20);
     public Fly() {
         super("Fly", "Allows the player to fly", ()->true, true, Category.MOVEMENT);
         settings.add(flySpeed);

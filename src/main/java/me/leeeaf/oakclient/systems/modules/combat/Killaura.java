@@ -20,17 +20,14 @@ import net.minecraft.util.Hand;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class Killaura extends Module {
-    private final DoubleSetting range = new DoubleSetting("Range", "Range", "Maximum range of attacksTEST", ()->true, 0, 6, 4.25);
-    private final BooleanSetting delay1_9 = new BooleanSetting("1.9 delay", "1.9 delay", "Should use 1.9 delay?", ()->true, true);
-    private final BooleanSetting attackThroughBlocks = new BooleanSetting("Through blocks", "Through blocks", "Should attack through blocks?", ()->true, false);
-    private final EnumSetting<SortMethod> sortMethod = new EnumSetting<>("Sort method", "SortMethod", "How to sort entities", () -> true, SortMethod.HEALTH, SortMethod.class);
+    private final DoubleSetting range = new DoubleSetting("Range", "range", "Maximum range of attacksTEST", ()->true, 0, 6, 4.25);
+    private final BooleanSetting delay1_9 = new BooleanSetting("1.9 delay", "1.9Delay", "Should use 1.9 delay?", ()->true, true);
+    private final BooleanSetting attackThroughBlocks = new BooleanSetting("Through blocks", "throughBlocks", "Should attack through blocks?", ()->true, false);
+    private final EnumSetting<SortMethod> sortMethod = new EnumSetting<>("Sort method", "sortMethod", "How to sort entities", () -> true, SortMethod.HEALTH, SortMethod.class);
     private final BooleanSetting rotate = new BooleanSetting("Rotate", "rotate", "Rotates towards target", ()->true, true);
     private final EnumSetting<RotationMode> rotationMode = new EnumSetting<>("Rotation mode", "rotationMode", "How to rotate", ()->true, RotationMode.PACKET, RotationMode.class);
 

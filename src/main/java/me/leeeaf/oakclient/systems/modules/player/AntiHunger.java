@@ -7,7 +7,7 @@ import me.leeeaf.oakclient.systems.modules.Category;
 import me.leeeaf.oakclient.systems.modules.Module;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class AntiHunger extends Module {
     private final BooleanSetting pauseInLiquids = new BooleanSetting("Pause in liquids", "pauseInLiquids", "Pause module in liquids", ()->true, true);

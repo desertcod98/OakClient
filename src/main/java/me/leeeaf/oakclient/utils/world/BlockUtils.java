@@ -11,7 +11,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class BlockUtils {
     public static boolean place(BlockPos blockPos, int invSlot, Hand hand, boolean rotate,  boolean checkEntities, boolean swingHand, boolean airPlace){

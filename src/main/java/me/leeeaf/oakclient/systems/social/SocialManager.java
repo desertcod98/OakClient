@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class SocialManager {
     private static final Map<String, Relationship> relationshipMap = new HashMap<>();

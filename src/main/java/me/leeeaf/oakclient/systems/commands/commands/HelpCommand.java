@@ -4,7 +4,7 @@ import me.leeeaf.oakclient.systems.commands.Command;
 import me.leeeaf.oakclient.systems.commands.CommandRegistry;
 import net.minecraft.text.Text;
 
-import static me.leeeaf.oakclient.OakClientClient.mc;
+import static me.leeeaf.oakclient.OakClient.mc;
 
 public class HelpCommand extends Command {
     public HelpCommand() {
