@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerListHud.class)
-public class PlayerListHudMixin {
+public abstract class PlayerListHudMixin {
     @Inject(method = "applyGameModeFormatting", at=@At("HEAD"))
     void formatNamesByRelationship(PlayerListEntry entry, MutableText name, CallbackInfoReturnable<Text> cir){
         Relationship relationship = SocialManager.getRelationship(name.getString());

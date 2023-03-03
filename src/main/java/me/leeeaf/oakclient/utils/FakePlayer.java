@@ -14,6 +14,12 @@ public class FakePlayer extends OtherClientPlayerEntity {
         super(mc.world, player.getGameProfile(), null);
         copyPositionAndRotation(player);
         setPose(player.getPose());
+
+        //does not seem to work?
+        Byte playerModel = player.getDataTracker().get(PlayerEntity.PLAYER_MODEL_PARTS);
+        dataTracker.set(PlayerEntity.PLAYER_MODEL_PARTS, playerModel);
+        getAttributes().setFrom(player.getAttributes());
+
         setHealth(20);
         setUuid(UUID.randomUUID());
     }

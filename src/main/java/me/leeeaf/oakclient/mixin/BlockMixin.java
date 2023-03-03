@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
-public class BlockMixin{
+public abstract class BlockMixin{
     private static XRay xRay;
 
     @Inject(method = "shouldDrawSide", at = @At("RETURN"), cancellable = true)

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientConnection.class)
-public class ClientConnectionMixin { //TODO make all mixins abstract
+public abstract class ClientConnectionMixin {
     @Shadow
     private Channel channel;
 

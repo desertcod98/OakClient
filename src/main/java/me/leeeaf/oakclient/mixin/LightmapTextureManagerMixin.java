@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(LightmapTextureManager.class)
-public class LightmapTextureManagerMixin {
+public abstract class LightmapTextureManagerMixin {
     @ModifyArgs(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/NativeImage;setColor(III)V"))
     private void update(Args args) {
         XRay xRay = (XRay) Category.getModule(XRay.class);

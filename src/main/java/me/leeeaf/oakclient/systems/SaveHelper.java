@@ -99,7 +99,6 @@ public class SaveHelper {
         try {
             modulesJsonString = FileHelper.getInstance().readFromFile("modules.json");
         } catch (IOException e) {
-            ChatLogger.error("Couldn't read file modules.json!");
             return;
         }
         JsonObject modulesJson = JsonParser.parseString(modulesJsonString).getAsJsonObject();
