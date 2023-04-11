@@ -1,7 +1,9 @@
 package me.leeeaf.oakclient.utils.player;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
+import net.minecraft.util.Hand;
 
 import java.util.function.Predicate;
 
@@ -37,5 +39,14 @@ public class InventoryUtils {
             }
         }
         return -1;
+    }
+
+    public static void swapOffhand(){
+        if (!mc.player.isSpectator()) {
+            ItemStack itemStack = mc.player.getStackInHand(Hand.OFF_HAND);
+            mc.player.setStackInHand(Hand.OFF_HAND, mc.player.getStackInHand(Hand.MAIN_HAND));
+            mc.player.setStackInHand(Hand.MAIN_HAND, itemStack);
+            mc.player.clearActiveItem();
+        }
     }
 }
